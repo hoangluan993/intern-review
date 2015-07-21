@@ -56,7 +56,7 @@ public class ContactsFragment extends Fragment {
 		mAvatars.add(R.drawable.img_avatar_7);
 		mUserNames = new ArrayList<String>();
 		for (int i = 0; i < 14; i++) {
-			mUserNames.add(userName);
+			mUserNames.add(userName+" "+i);
 		}
 	}
 }

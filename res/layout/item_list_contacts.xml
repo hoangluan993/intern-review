@@ -7,12 +7,13 @@
         android:layout_width="match_parent"
         android:layout_height="73.5dp" >
 
-        <ImageView
-            android:id="@+id/imgavatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/rlavatar"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="18.5dp" />
+            android:layout_marginLeft="20dp" >
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/llbutton"
@@ -28,18 +29,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/img_edit"
-                android:padding="8.5dp"/>
+                android:padding="8.5dp"
+                android:src="@drawable/img_edit" />
 
             <ImageView
                 android:id="@+id/imgdelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/img_delete"
-                android:padding="8.5dp"
                 android:layout_marginRight="8.5dp"
-                />
+                android:layout_weight="1"
+                android:padding="8.5dp"
+                android:src="@drawable/img_delete" />
         </LinearLayout>
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/llbutton"
-            android:layout_toRightOf="@id/imgavatar"
+            android:layout_toRightOf="@id/rlavatar"
             android:textColor="#505050"
             android:textSize="15dp" />
     </RelativeLayout>

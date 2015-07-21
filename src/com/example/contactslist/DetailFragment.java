@@ -14,15 +14,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class DetailFragment extends Fragment implements OnClickListener {
-	private TextView mCancel;
+	private TextView mdetailCancel,mdetailUsername;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater
 				.inflate(R.layout.fragment_detail, container, false);
-		mCancel = (TextView) view.findViewById(R.id.tvcancel);
-		mCancel.setOnClickListener(this);
+		mdetailCancel = (TextView) view.findViewById(R.id.tvcancel);
+		mdetailUsername = (TextView) view.findViewById(R.id.tvdetailusername);
+		mdetailUsername.setText(ContactListAdapter.mUserNames.get(ContactListAdapter.sVitri));
+		
+		mdetailCancel.setOnClickListener(this);
 		return view;
 	}
 

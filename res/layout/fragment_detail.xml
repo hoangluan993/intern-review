@@ -11,7 +11,7 @@
         android:layout_below="@id/rlactionbar" >
 
         <RelativeLayout
-            android:id="@+id/rlavatar"
+            android:id="@+id/rldetailavatar"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_centerVertical="true"
@@ -20,15 +20,14 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tvusername"
+            android:id="@+id/tvdetailusername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="25dp"
-            android:layout_toRightOf="@id/rlavatar"
-            android:text="Hoang luan"
+            android:layout_toRightOf="@id/rldetailavatar"
             android:textColor="#505050"
-            android:textSize="20dp" />
+            android:textSize="22dp" />
 
         <View
             android:layout_width="match_parent"
@@ -63,8 +62,11 @@
             android:layout_marginTop="13dp"
             android:background="#f9f9f9"
             android:hint="Enter User Name"
+            android:textCursorDrawable="@null"
             android:textColorHint="#626262"
-            android:textSize="18dp" />
+            android:textSize="18dp">
+            <requestFocus />
+		</EditText>
 
         <View
             android:id="@+id/viewbotuser"
@@ -98,7 +100,8 @@
             android:layout_marginTop="13dp"
             android:background="@drawable/background_editext"
             android:hint="Enter Decription"
-            android:textColor="#626262" />
+            android:textCursorDrawable="@null"
+            android:textColorHint="#626262" />
 
         <View
             android:layout_width="match_parent"

@@ -6,7 +6,6 @@ package com.example.contactslist;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,14 +18,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 @SuppressLint("InflateParams")
-public class ContactListAdapter extends BaseAdapter implements OnClickListener {
+public class ContactListAdapter extends BaseAdapter {
 
 	private ArrayList<Integer> mAvatars;
-	private ArrayList<String> mUserNames;
+	public static ArrayList<String> mUserNames;
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
-	private int mVitri;
-
+	public static int sVitri;
 	/**
 	 * @param context
 	 *            application context
@@ -62,14 +60,13 @@ public class ContactListAdapter extends BaseAdapter implements OnClickListener {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder;
-		mVitri = position;
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.item_list_contacts, null);
 			viewHolder = new ViewHolder();
-			viewHolder.imgAvatar = (ImageView) convertView
-					.findViewById(R.id.imgavatar);
+			viewHolder.rlavatar = (RelativeLayout) convertView
+					.findViewById(R.id.rlavatar);
 			viewHolder.userName = (TextView) convertView
 					.findViewById(R.id.tvusername);
 			viewHolder.btnEdit = (ImageView) convertView
@@ -81,17 +78,34 @@ public class ContactListAdapter extends BaseAdapter implements OnClickListener {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.imgAvatar.setImageResource(mAvatars.get(position));
+		viewHolder.rlavatar.setBackgroundResource(mAvatars.get(position));
 		viewHolder.userName.setText(mUserNames.get(position));
-		viewHolder.btnEdit.setOnClickListener(this);
-		viewHolder.btnDelete.setOnClickListener(this);
-
+		viewHolder.btnEdit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				MainActivity.scheckBack = true;
+				showDetailFragment();
+				sVitri= position;
+			}
+		});
+		viewHolder.btnDelete.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				new DeleteDialogFragment().show(mContext.getFragmentManager(),
+						"dialog");
+				sVitri= position;
+			}
+		});
+		
 		return convertView;
 	}
 
 	public static class ViewHolder {
 		public TextView userName;
-		public ImageView imgAvatar, btnEdit, btnDelete;
+		public ImageView btnEdit, btnDelete;
+		public RelativeLayout rlavatar;
 	}
 	/**
 	 * show Detail Fragment
@@ -101,24 +115,6 @@ public class ContactListAdapter extends BaseAdapter implements OnClickListener {
 				.beginTransaction();
 		fragtst.replace(R.id.container_fragment, new DetailFragment());
 		fragtst.commit();
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.imgedit:
-			MainActivity.scheckBack = true;
-			showDetailFragment();
-			break;
-		case R.id.imgdelete:
-			new DeleteDialogFragment().show(mContext.getFragmentManager(),
-					"dialog");
-			break;
-
-		default:
-			break;
-		}
-
 	}
 
 }
