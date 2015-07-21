@@ -1,3 +1,7 @@
+/*
+ * Initialization List Contacts
+ * Display to interface 
+ */
 package com.example.contactslist;
 
 import java.util.ArrayList;
@@ -15,23 +19,23 @@ public class ContactsFragment extends Fragment {
 	private ListView mlistContact;
 
 	/**
-	 * Show List Contacts
-	 * Create and Set Adapter for ListView
+	 * Show List Contacts Create and Set Adapter for ListView
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_main, container, false);
+		View view = inflater.inflate(R.layout.fragment_contact, container,
+				false);
 		init();
 		mlistContact = (ListView) view.findViewById(R.id.lvcontact);
-		ContactListAdapter adapter = new ContactListAdapter(getActivity(),
-				mAvatars, mUserNames);
+		ContactListAdapter adapter = new ContactListAdapter(
+				(MainActivity) getActivity(), mAvatars, mUserNames);
 		mlistContact.setAdapter(adapter);
 		return view;
 	}
 
 	/**
-	 * Init values for ArrayList mAvatars,mUserNames Set values for ListView
+	 * Init values for ArrayList mAvatars,mUserNames use to Set values for ListView
 	 */
 	private void init() {
 		String userName = "Hoang Luan";
