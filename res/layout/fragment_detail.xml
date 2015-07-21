@@ -36,23 +36,23 @@
         android:layout_height="126dp"
         android:layout_below="@id/rlactionbar"
         >
-        <ImageView 
-            android:id="@+id/imgavatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_avatar_2"
+        <RelativeLayout 
+             android:id="@+id/rlavatar"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/img_avatar_2"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            />
+            ></RelativeLayout>
         <TextView 
             android:id="@+id/tvusername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/imgavatar"
+            android:layout_toRightOf="@id/rlavatar"
             android:layout_marginLeft="25dp"
             android:layout_centerVertical="true"
             android:text="Hoang luan"
-            android:textSize="18dp"
+            android:textSize="20dp"
             android:textColor="#505050"
             />
         <View 
@@ -65,42 +65,49 @@
     <RelativeLayout
         android:id="@+id/rlusername" 
         android:layout_width="match_parent"
-        android:layout_height="46.5dp"
+        android:layout_height="wrap_content"
         android:background="#f9f9f9"
         android:layout_below="@id/rlinfo"
         android:layout_marginTop="22dp"
         >
          <View 
+             android:id="@+id/viewtopuser"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#d1d1d1"
             />
          <EditText 
+             android:id="@+id/edtusername"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_centerVertical="true"
              android:layout_marginLeft="20dp"
-             android:text="User Name"
-             android:singleLine="true"
+             android:hint="Enter User Name"
              android:textSize="18dp"
              android:textColorHint="#626262"
              android:background="#f9f9f9"
+             android:layout_below="@id/viewtopuser"
+             android:layout_marginTop="13dp" 
+             android:layout_marginBottom="13dp"
+             android:layout_marginRight="10dp"
              />
          <View 
+             android:id="@+id/viewbotuser"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#d1d1d1"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/edtusername"
             />
     </RelativeLayout>
     <RelativeLayout 
         android:layout_width="match_parent"
-        android:layout_height="158dp"
+        android:layout_height="wrap_content"
         android:background="#f9f9f9"
         android:layout_below="@id/rlusername"
         android:layout_marginTop="40dp"
         >
          <View 
+             android:id="@+id/viewdecrip"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#d1d1d1"
@@ -109,15 +116,20 @@
              android:id="@+id/tvdecription"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
+             android:hint="Enter Decription"
              android:layout_marginLeft="20dp"
              android:layout_marginRight="10dp"
              android:textColor="#626262"
+             android:layout_below="@id/viewdecrip"
+             android:background="@drawable/bg_editext"
+             android:layout_marginTop="13dp" 
+             android:layout_marginBottom="13dp"
              />
          <View 
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#d1d1d1"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tvdecription"
             />
     </RelativeLayout>
     <RelativeLayout 
