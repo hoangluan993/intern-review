@@ -14,23 +14,38 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="18.5dp" />
 
-        <ImageView
-            android:id="@+id/imgarrow"
+        <LinearLayout
+            android:id="@+id/llbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow"
-            android:padding="10dp"/>
-        
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <Button
+                android:id="@+id/btnedit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="EDIT" />
+
+            <Button
+                android:id="@+id/btndelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DELETE" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tvusername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="13.5dp"
-            android:layout_marginRight="13.5dp"
-            android:layout_toLeftOf="@id/imgarrow"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/llbutton"
             android:layout_toRightOf="@id/imgavatar"
             android:textColor="#505050"
             android:textSize="15dp" />
