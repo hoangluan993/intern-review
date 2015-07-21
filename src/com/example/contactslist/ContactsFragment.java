@@ -30,7 +30,7 @@ public class ContactsFragment extends Fragment {
 		return view;
 	}
 
-	/*
+	/**
 	 * Init values for ArrayList mAvatars,mUserNames Set values for ListView
 	 */
 	private void init() {

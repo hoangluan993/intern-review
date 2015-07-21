@@ -23,19 +23,23 @@
             android:orientation="horizontal"
             android:weightSum="2" >
 
-            <Button
-                android:id="@+id/btnedit"
+            <ImageView
+                android:id="@+id/imgedit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="EDIT" />
+                android:src="@drawable/img_edit"
+                android:padding="8.5dp"/>
 
-            <Button
-                android:id="@+id/btndelete"
+            <ImageView
+                android:id="@+id/imgdelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="DELETE" />
+                android:src="@drawable/img_delete"
+                android:padding="8.5dp"
+                android:layout_marginRight="8.5dp"
+                />
         </LinearLayout>
 
         <TextView

@@ -3,13 +3,17 @@ package com.example.contactslist;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @SuppressLint("InflateParams")
 public class ContactListAdapter extends BaseAdapter {
@@ -53,7 +57,7 @@ public class ContactListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder;
-
+		final int VITRI = position;
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.item_list_contacts, null);
 			viewHolder = new ViewHolder();
@@ -61,6 +65,10 @@ public class ContactListAdapter extends BaseAdapter {
 					.findViewById(R.id.imgavatar);
 			viewHolder.userName = (TextView) convertView
 					.findViewById(R.id.tvusername);
+			viewHolder.btnEdit = (ImageView) convertView
+					.findViewById(R.id.imgedit);
+			viewHolder.btnDelete = (ImageView) convertView
+					.findViewById(R.id.imgdelete);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -68,13 +76,31 @@ public class ContactListAdapter extends BaseAdapter {
 
 		viewHolder.imgAvatar.setImageResource(mAvatars.get(position));
 		viewHolder.userName.setText(mUserNames.get(position));
+		viewHolder.btnEdit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				FragmentTransaction fragtst =MainActivity.sfragment.beginTransaction();
+				fragtst.replace(R.id.container_fragment, new DetailFragment());
+				fragtst.commit();
+				
+			}
+		});
+		viewHolder.btnDelete.setOnClickListener(new  OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(mContext,"Delete vi tri "+VITRI, Toast.LENGTH_LONG).show();
+				
+			}
+		});
 
 		return convertView;
 	}
 
 	public static class ViewHolder {
 		public TextView userName;
-		public ImageView imgAvatar;
+		public ImageView imgAvatar,btnEdit,btnDelete;
 	}
 
 }
