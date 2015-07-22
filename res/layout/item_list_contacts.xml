@@ -6,13 +6,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="73.5dp" >
+        <RelativeLayout 
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:background="@drawable/ic_ellipse"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            ></RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rlavatar"
-            android:layout_width="49dp"
-            android:layout_height="49dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp" >
+            android:layout_marginLeft="20.35dp" >
         </RelativeLayout>
 
         <LinearLayout

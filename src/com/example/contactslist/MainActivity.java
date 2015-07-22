@@ -1,5 +1,7 @@
 package com.example.contactslist;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -8,15 +10,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 	public static FragmentManager sfragmentmng;
-	private ImageView mimgBack;
+	private RelativeLayout mrlBack;
 	public static boolean scheckBack = false;
 	public static Fragment sfragment;
 	private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
 	private long mBackPressed;
+	public static ArrayList<Integer> sAvatars;
+//	public static ArrayList<Contacts> suserName;
+	public static MyDatabase data;
 
 	/**
 	 * Show ContactsFragment
@@ -25,11 +31,12 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		setDatabase();
 		sfragmentmng = getFragmentManager();
 		sfragment = new ContactsFragment();
 		showContactFragment();
-		mimgBack = (ImageView) findViewById(R.id.imgback);
-		mimgBack.setOnClickListener(this);
+		mrlBack = (RelativeLayout) findViewById(R.id.rlback);
+		mrlBack.setOnClickListener(this);
 	}
 	/**
 	 * Set event for action back
@@ -38,7 +45,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.imgback:
+		case R.id.rlback:
 			if (scheckBack) {
 				showContactFragment();
 				scheckBack = !scheckBack;
@@ -71,4 +78,17 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	    mBackPressed = System.currentTimeMillis();
 	};
+	private void setDatabase(){
+		String userName = "Hoang Luan";
+		String decription = "DECRIPTION";
+		sAvatars = new ArrayList<Integer>();
+		for (int i = 0; i < 20; i++) {
+			sAvatars.add(R.drawable.img_avatar_1);
+		}
+
+		data = new MyDatabase(this);
+		for(int i=0;i<20;i++){
+			data.addContact(new Contacts(""+i, userName, decription));
+		}
+	}
 }

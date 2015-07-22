@@ -9,13 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="126dp"
         android:layout_below="@id/rlactionbar" >
-
+		<RelativeLayout 
+		    android:layout_width="95dp"
+		    android:layout_height="95dp"
+		    android:background="@drawable/ic_eclipse_detail"
+		    android:layout_centerVertical="true"
+		    android:layout_marginLeft="20dp"
+		    ></RelativeLayout>
         <RelativeLayout
             android:id="@+id/rldetailavatar"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="94.2dp"
+            android:layout_height="94.2dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="20.35dp"
             android:background="@drawable/img_avatar_2" >
         </RelativeLayout>
 
@@ -51,7 +57,7 @@
             android:background="#d1d1d1" />
 
         <EditText
-            android:id="@+id/edtusername"
+            android:id="@+id/edteditusername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/viewtopuser"
@@ -64,15 +70,16 @@
             android:hint="Enter User Name"
             android:textCursorDrawable="@null"
             android:textColorHint="#626262"
+            android:textColor="#000000"
             android:textSize="18dp">
-            <requestFocus />
+           
 		</EditText>
 
         <View
             android:id="@+id/viewbotuser"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_below="@+id/edtusername"
+            android:layout_below="@+id/edteditusername"
             android:background="#d1d1d1" />
     </RelativeLayout>
 
@@ -101,7 +108,8 @@
             android:background="@drawable/background_editext"
             android:hint="Enter Decription"
             android:textCursorDrawable="@null"
-            android:textColorHint="#626262" />
+            android:textColorHint="#626262" 
+            android:textColor="#000000"/>
 
         <View
             android:layout_width="match_parent"

@@ -20,8 +20,8 @@ import android.widget.TextView;
 @SuppressLint("InflateParams")
 public class ContactListAdapter extends BaseAdapter {
 
-	private ArrayList<Integer> mAvatars;
-	public static ArrayList<String> mUserNames;
+	public static ArrayList<Integer> sAvatars;
+	public static ArrayList<Contacts> suserNames;
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
 	public static int sVitri;
@@ -36,22 +36,22 @@ public class ContactListAdapter extends BaseAdapter {
 	 *            ArrayList<String> set UserName for Contacts
 	 */
 	public ContactListAdapter(MainActivity context,
-			ArrayList<Integer> mAvatars, ArrayList<String> mUserNames) {
+			ArrayList<Integer> mAvatars, ArrayList<Contacts> mUserNames) {
 		this.mContext = context;
-		this.mAvatars = mAvatars;
-		this.mUserNames = mUserNames;
+		this.sAvatars = mAvatars;
+		this.suserNames = mUserNames;
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
 	public int getCount() {
-		return mAvatars.size();
+		return sAvatars.size();
 	}
 
 	@Override
 	public String getItem(int position) {
-		return mUserNames.get(position);
+		return suserNames.get(position).getUserName();
 	}
 
 	@Override
@@ -78,8 +78,8 @@ public class ContactListAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.rlavatar.setBackgroundResource(mAvatars.get(position));
-		viewHolder.userName.setText(mUserNames.get(position));
+		viewHolder.rlavatar.setBackgroundResource(sAvatars.get(position));
+		viewHolder.userName.setText(suserNames.get(position).getUserName());
 		viewHolder.btnEdit.setOnClickListener(new OnClickListener() {
 			
 			@Override

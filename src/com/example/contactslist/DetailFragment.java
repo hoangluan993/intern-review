@@ -11,10 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DetailFragment extends Fragment implements OnClickListener {
 	private TextView mdetailCancel,mdetailUsername;
+	private EditText edteditUsername;
+	private RelativeLayout rldetailAvatar;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,8 +27,12 @@ public class DetailFragment extends Fragment implements OnClickListener {
 				.inflate(R.layout.fragment_detail, container, false);
 		mdetailCancel = (TextView) view.findViewById(R.id.tvcancel);
 		mdetailUsername = (TextView) view.findViewById(R.id.tvdetailusername);
-		mdetailUsername.setText(ContactListAdapter.mUserNames.get(ContactListAdapter.sVitri));
+		edteditUsername = (EditText) view.findViewById(R.id.edteditusername);
+		rldetailAvatar = (RelativeLayout) view.findViewById(R.id.rldetailavatar);
 		
+		mdetailUsername.setText(ContactListAdapter.suserNames.get(ContactListAdapter.sVitri).getUserName());
+		edteditUsername.setText(ContactListAdapter.suserNames.get(ContactListAdapter.sVitri).getUserName());
+		rldetailAvatar.setBackgroundResource(ContactListAdapter.sAvatars.get(ContactListAdapter.sVitri));
 		mdetailCancel.setOnClickListener(this);
 		return view;
 	}

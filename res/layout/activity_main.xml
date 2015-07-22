@@ -8,15 +8,21 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="#00bbd2" >
-
+	<RelativeLayout 
+	    android:id="@+id/rlback"
+	    android:layout_width="60dp"
+	    android:layout_height="match_parent"
+	    android:background="@drawable/background_pressed"
+	    android:onClick="true"
+	    >
         <ImageView
-            android:id="@+id/imgback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="17dp"
+            android:layout_marginLeft="20dp"
             android:scaleType="centerInside"
+            android:layout_centerVertical="true"
             android:src="@drawable/ic_back" />
-
+	</RelativeLayout>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

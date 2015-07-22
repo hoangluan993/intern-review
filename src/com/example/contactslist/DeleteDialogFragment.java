@@ -30,7 +30,7 @@ public class DeleteDialogFragment extends DialogFragment implements
 		mbuilder.setView(view);
 		mdelCancel = (RelativeLayout) view.findViewById(R.id.rldelcancel);
 		tvdelUserName = (TextView) view.findViewById(R.id.tvdelusername);
-		tvdelUserName.setText(ContactListAdapter.mUserNames.get(ContactListAdapter.sVitri));
+		tvdelUserName.setText(ContactListAdapter.suserNames.get(ContactListAdapter.sVitri).getUserName());
 		mdelCancel.setOnClickListener(this);
 		return mbuilder.create();
 	}
