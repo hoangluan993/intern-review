@@ -24,6 +24,7 @@ public class ContactListAdapter extends BaseAdapter {
 	private static ArrayList<Contacts> sContacts;
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
+
 	/**
 	 * @param context
 	 *            application context
@@ -34,8 +35,8 @@ public class ContactListAdapter extends BaseAdapter {
 	 * @param mUserNames
 	 *            ArrayList<String> set UserName for Contacts
 	 */
-	public ContactListAdapter(MainActivity context,
-			ArrayList<Integer> avatars, ArrayList<Contacts> contacts) {
+	public ContactListAdapter(MainActivity context, ArrayList<Integer> avatars,
+			ArrayList<Contacts> contacts) {
 		this.mContext = context;
 		ContactListAdapter.sAvatars = avatars;
 		ContactListAdapter.sContacts = contacts;
@@ -58,6 +59,10 @@ public class ContactListAdapter extends BaseAdapter {
 		return position;
 	}
 
+	/**
+	 * Init values for Item of ListView. Set event Click ImageView Edit and
+	 * Delete.
+	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder;
@@ -80,7 +85,7 @@ public class ContactListAdapter extends BaseAdapter {
 		viewHolder.rlavatar.setBackgroundResource(getAvatars().get(position));
 		viewHolder.userName.setText(getContacts().get(position).getUserName());
 		viewHolder.btnEdit.setOnClickListener(new OnClickListener() {
-			
+			// TODO Set event click ImageView Edit
 			@Override
 			public void onClick(View v) {
 				MainActivity.scheckBack = true;
@@ -88,14 +93,14 @@ public class ContactListAdapter extends BaseAdapter {
 			}
 		});
 		viewHolder.btnDelete.setOnClickListener(new OnClickListener() {
-			
+			// TODO Set event click ImageView Delete
 			@Override
 			public void onClick(View v) {
-				new DeleteDialogFragment(position,getContacts()).show(mContext.getFragmentManager(),
-						"dialog");
+				new DeleteDialogFragment(position, getContacts()).show(
+						mContext.getFragmentManager(), "dialog");
 			}
 		});
-		
+
 		return convertView;
 	}
 
@@ -104,20 +109,32 @@ public class ContactListAdapter extends BaseAdapter {
 		public ImageView btnEdit, btnDelete;
 		public RelativeLayout rlavatar;
 	}
+
 	/**
-	 * show Detail Fragment
+	 * show Interface Edit Detail Fragment
 	 */
 	private void showDetailFragment(int position) {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.container_fragment, new DetailFragment(position,getContacts()));
+		fragtst.replace(R.id.container_fragment, new DetailFragment(position,
+				getContacts(), getAvatars()));
 		fragtst.commit();
 	}
 
+	/**
+	 * Get avatar for contacts From ArrayList
+	 * 
+	 * @return ArrayList<Integer> sAvatars
+	 */
 	public static ArrayList<Integer> getAvatars() {
 		return sAvatars;
 	}
 
+	/**
+	 * Get information Contacts
+	 * 
+	 * @return ArrayList<Contacts> sContacts
+	 */
 	public static ArrayList<Contacts> getContacts() {
 		return sContacts;
 	}

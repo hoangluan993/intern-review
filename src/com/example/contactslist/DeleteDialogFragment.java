@@ -17,62 +17,87 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class DeleteDialogFragment extends DialogFragment implements
 		OnClickListener {
-	private RelativeLayout mdelCancel,mdelOk;
-	private TextView tvdelUserName;
-	private AlertDialog.Builder mbuilder;
+	private RelativeLayout mdelCancel, mdelOk;
+	private TextView mdelUserName;
+	private AlertDialog.Builder mBuilder;
 	private ArrayList<Contacts> mContacts;
-	private int mposition;
-	private View mview;
+	private int mPosition;
+	private View mView;
+
 	public DeleteDialogFragment(int position, ArrayList<Contacts> contacts) {
-		mposition = position;
+		mPosition = position;
 		this.mContacts = contacts;
 	}
 
+	/**
+	 * Init Dialog Delete from Layout custom
+	 */
+
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-		mbuilder = new AlertDialog.Builder(getActivity());
+		// TODO Create Diallog delete
+		mBuilder = new AlertDialog.Builder(getActivity());
 		LayoutInflater mInflater = getActivity().getLayoutInflater();
-		mview= mInflater.inflate(R.layout.dialog_delete, null);
-		mbuilder.setView(mview);
+		mView = mInflater.inflate(R.layout.dialog_delete, null);
+		mBuilder.setView(mView);
 		init();
-		return mbuilder.create();
+		return mBuilder.create();
 	}
-	
-	private void init(){
-		mdelCancel = (RelativeLayout) mview.findViewById(R.id.rldelcancel);
-		mdelOk = (RelativeLayout) mview.findViewById(R.id.rldelok);
-		
-		tvdelUserName = (TextView) mview.findViewById(R.id.tvdelusername);
-		tvdelUserName.setText(mContacts.get(mposition).getUserName());
+
+	/**
+	 * Set values for Username get data from Database Create event Click button
+	 * Cancel to Don't Confirm delete Create event Click button Ok to Confirm
+	 * delete
+	 */
+
+	private void init() {
+		mdelCancel = (RelativeLayout) mView.findViewById(R.id.rldelcancel);
+		mdelOk = (RelativeLayout) mView.findViewById(R.id.rldelok);
+
+		mdelUserName = (TextView) mView.findViewById(R.id.tvdelusername);
+		mdelUserName.setText(mContacts.get(mPosition).getUserName());
+
 		mdelCancel.setOnClickListener(this);
 		mdelOk.setOnClickListener(this);
 	}
 
+	/**
+	 * Event click button Cancel and Ok
+	 */
 	@Override
 	public void onClick(View v) {
+		// TODO Event when click Button
 		switch (v.getId()) {
 		case R.id.rldelcancel:
+			// TODO Set event click button Cancel in dialog DELETE
 			DeleteDialogFragment.this.dismiss();
 			break;
+
 		case R.id.rldelok:
-			MainActivity.sdata.deleteContacts(mContacts.get(mposition).getUserName());
+			// TODO Set event click button OK in dialog DELETE
+			MainActivity.sdata.deleteContacts(mContacts.get(mPosition)
+					.getUserName());
 			DeleteDialogFragment.this.dismiss();
 			showContactFragment();
 			break;
-			
+
 		default:
 			break;
 		}
 
 	}
-	public static void showContactFragment() {
-		FragmentTransaction fragtst = MainActivity.sfragmentmng.beginTransaction();
-		fragtst.replace(R.id.container_fragment, new ContactsFragment(MainActivity.getAvatars(),MainActivity.getData()));
+
+	/**
+	 * Show Interface List Contacts Fragment
+	 */
+	public void showContactFragment() {
+		FragmentTransaction fragtst = MainActivity.sfragmentmng
+				.beginTransaction();
+		fragtst.replace(R.id.container_fragment, new ContactsFragment(
+				MainActivity.getAvatars(), MainActivity.getData()));
 		fragtst.commit();
 	}
 

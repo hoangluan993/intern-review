@@ -22,7 +22,7 @@
                 android:background="#b0b0b5" />
 
             <LinearLayout
-                android:id="@+id/llokcancel"
+                android:id="@+id/lldelokcancel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/viewtop"
@@ -86,7 +86,7 @@
                     android:layout_weight="1"
                     android:text="Are you sure you want to"
                     android:textColor="#b0b0b5"
-                    android:textSize="18dp" />
+                    android:textSize="20dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -101,15 +101,16 @@
                         android:layout_height="wrap_content"
                         android:text="delete"
                         android:textColor="#b0b0b5"
-                        android:textSize="18dp" />
+                        android:textSize="20dp" />
 
                     <TextView
                         android:id="@+id/tvdelusername"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:textColor="#b0b0b5"
-                        android:textSize="18dp" />
+                        android:textColor="#4f4c4c"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

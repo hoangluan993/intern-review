@@ -5,17 +5,19 @@
     android:background="#ffffff" >
 
     <RelativeLayout
-        android:id="@+id/rlinfo"
+        android:id="@+id/rldetail"
         android:layout_width="match_parent"
         android:layout_height="126dp"
         android:layout_below="@id/rlactionbar" >
-		<RelativeLayout 
-		    android:layout_width="95dp"
-		    android:layout_height="95dp"
-		    android:background="@drawable/ic_eclipse_detail"
-		    android:layout_centerVertical="true"
-		    android:layout_marginLeft="20dp"
-		    ></RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/ic_eclipse_detail" >
+        </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/rldetailavatar"
             android:layout_width="94.2dp"
@@ -46,7 +48,7 @@
         android:id="@+id/rlusername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rlinfo"
+        android:layout_below="@id/rldetail"
         android:layout_marginTop="22dp"
         android:background="#f9f9f9" >
 
@@ -58,7 +60,7 @@
 
         <EditText
             android:id="@+id/edteditusername"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/viewtopuser"
             android:layout_centerVertical="true"
@@ -68,12 +70,11 @@
             android:layout_marginTop="13dp"
             android:background="#f9f9f9"
             android:hint="Enter User Name"
-            android:textCursorDrawable="@null"
-            android:textColorHint="#626262"
             android:textColor="#000000"
-            android:textSize="18dp">
-           
-		</EditText>
+            android:textColorHint="#626262"
+            android:textCursorDrawable="@null"
+            android:textSize="18dp" >
+        </EditText>
 
         <View
             android:id="@+id/viewbotuser"
@@ -99,7 +100,7 @@
 
         <EditText
             android:id="@+id/edteditdecription"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/viewdecrip"
             android:layout_marginBottom="13dp"
@@ -108,9 +109,9 @@
             android:layout_marginTop="13dp"
             android:background="@drawable/background_editext"
             android:hint="Enter Decription"
-            android:textCursorDrawable="@null"
-            android:textColorHint="#626262" 
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:textColorHint="#626262"
+            android:textCursorDrawable="@null" />
 
         <View
             android:layout_width="match_parent"

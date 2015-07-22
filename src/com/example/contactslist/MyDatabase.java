@@ -1,3 +1,6 @@
+/*
+ * Create database
+ */
 package com.example.contactslist;
 
 import java.util.ArrayList;
@@ -12,18 +15,22 @@ import android.util.Log;
 public class MyDatabase {
 	private SQLiteDatabase mData;
 
+	/**
+	 * Create Database
+	 */
 	public MyDatabase(Context context) {
+		// TODO Create Database
 		mData = context.openOrCreateDatabase("MyContacts.db",
 				Activity.MODE_PRIVATE, null);
-		
-		String drop = "drop table contacts";
-		try{
+
+		String drop = "DROP TABLE contacts";
+		try {
 			mData.execSQL(drop);
-		} catch (SQLException ex){
-			
+		} catch (SQLException ex) {
+
 		}
 
-		String sql = "create table contacts (";
+		String sql = "CREATE TABLE contacts (";
 		sql += "id text primary key,";
 		sql += "username text not null,";
 		sql += "dicription text)";
@@ -31,16 +38,13 @@ public class MyDatabase {
 		try {
 			mData.execSQL(sql);
 		} catch (SQLException sqlex) {
-			// Table already exists
-
-			Cursor cursor = mData.rawQuery("select * from contacts", null);
-
-			for (String name : cursor.getColumnNames()) {
-				Log.d("colname", name);
-			}
+			Log.d("CREATE", "Error");
 		}
 	}
 
+	/**
+	 * Insert Database
+	 */
 	public String addContact(Contacts contact) {
 		// TODO insert data to database
 
@@ -48,36 +52,25 @@ public class MyDatabase {
 		String username = contact.getUserName();
 		String dicription = contact.getDecription();
 
-		if (username == null) {
-			return "Insert fail";
-		}
-
-		if (dicription == null) {
-			dicription = "";
-		}
-
-		String sql = "insert into contacts values('" + id + "','" + username
+		String sql = "INSERT INTO contacts VALUES('" + id + "','" + username
 				+ "', '" + dicription + "');";
 		try {
 			mData.execSQL(sql);
 		} catch (SQLException ex) {
-			Log.d("add " + id, "fail");
-			Cursor cursor = mData.rawQuery("select * from contacts", null);
-
-			for (Contacts ct : getContacts()){
-				Log.d("contact", ct.getId());
-			}
+			Log.d("INSERT", "Error");
 		}
 
 		return "Success";
 	}
 
+	/**
+	 * Get data from Database for ArrayList
+	 */
 	public ArrayList<Contacts> getContacts() {
-		// TODO get all data from database
-
+		// TODO get data for ArrayList
 		ArrayList<Contacts> contacts = new ArrayList<Contacts>();
 
-		String sql = "select * from contacts";
+		String sql = "SELECT * FROM contacts";
 		Cursor cursor = mData.rawQuery(sql, null);
 
 		cursor.moveToFirst();
@@ -93,14 +86,34 @@ public class MyDatabase {
 
 		return contacts;
 	}
-	public void deleteContacts(String contacts){
-		mData.execSQL("DELETE FROM contacts WHERE username='"
-				+ contacts + "'");
+
+	/**
+	 * Delete Data from Database
+	 */
+	public void deleteContacts(String contacts) {
+		// TODO delete contacts
+		String sql = "DELETE FROM contacts WHERE username='" + contacts + "'";
+		try {
+			mData.execSQL(sql);
+		} catch (SQLException ex) {
+			Log.d("DELETE", "Error");
+		}
+
 	}
-	public void updateContacts(String id,String userName, String description){
-		mData.execSQL("UPDATE contacts SET username='" + userName
-				+ "',dicription='" + description
-				+ "' WHERE id='"+id+ "'");
+
+	/**
+	 * Update data for Database
+	 */
+	public void updateContacts(String id, String userName, String description) {
+		// TODO update contacts
+		String sql = "UPDATE contacts SET username='" + userName
+				+ "',dicription='" + description + "' WHERE id='" + id + "'";
+		try {
+			mData.execSQL(sql);
+		} catch (SQLException ex) {
+			Log.d("UPDATE", "Error");
+		}
+
 	}
-	
+
 }

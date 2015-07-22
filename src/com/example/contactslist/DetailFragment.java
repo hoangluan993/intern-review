@@ -17,53 +17,71 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class DetailFragment extends Fragment implements OnClickListener {
-	private TextView mdetailCancel,mdetailSave, mdetailUsername, meditDecription;
-	private EditText edteditUsername;
+	private TextView mdetailCancel, mdetailSave, mdetailUsername,
+			meditDescription;
+	private EditText meditUsername;
 	private RelativeLayout rldetailAvatar;
 	private ArrayList<Contacts> mContacts;
-	private int mposition;
-	private View mview;
-	
-	public DetailFragment(int position, ArrayList<Contacts> contacts) {
-		this.mposition = position;
+	private ArrayList<Integer> mAvatars;
+	private int mPosition;
+	private View mView;
+
+	public DetailFragment(int position, ArrayList<Contacts> contacts,
+			ArrayList<Integer> avatar) {
+		this.mPosition = position;
 		this.mContacts = contacts;
+		this.mAvatars = avatar;
 	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		mview = inflater
-				.inflate(R.layout.fragment_detail, container, false);
+		mView = inflater.inflate(R.layout.fragment_detail, container, false);
 		init();
-		return mview;
+		return mView;
 	}
-	
-	private void init(){
-		rldetailAvatar = (RelativeLayout) mview.findViewById(R.id.rldetailavatar);
-		mdetailCancel = (TextView) mview.findViewById(R.id.tvdetailcancel);
-		mdetailSave = (TextView) mview.findViewById(R.id.tvdetailsave);
-		mdetailUsername = (TextView) mview.findViewById(R.id.tvdetailusername);
-		edteditUsername = (EditText) mview.findViewById(R.id.edteditusername);
-		meditDecription = (TextView) mview.findViewById(R.id.edteditdecription);
-		
-		mdetailUsername.setText(ContactListAdapter.getContacts().get(mposition).getUserName());
-		edteditUsername.setText(ContactListAdapter.getContacts().get(mposition).getUserName());
-		meditDecription.setText(ContactListAdapter.getContacts().get(mposition).getDecription());
-		rldetailAvatar.setBackgroundResource(ContactListAdapter.getAvatars().get(mposition));
+
+	/**
+	 * Init values for Detail User name, Edit Username, Description Create event
+	 * click Cancel and Save
+	 */
+	private void init() {
+		rldetailAvatar = (RelativeLayout) mView
+				.findViewById(R.id.rldetailavatar);
+		mdetailCancel = (TextView) mView.findViewById(R.id.tvdetailcancel);
+		mdetailSave = (TextView) mView.findViewById(R.id.tvdetailsave);
+		mdetailUsername = (TextView) mView.findViewById(R.id.tvdetailusername);
+		meditUsername = (EditText) mView.findViewById(R.id.edteditusername);
+		meditDescription = (TextView) mView
+				.findViewById(R.id.edteditdecription);
+
+		mdetailUsername.setText(mContacts.get(mPosition).getUserName());
+		meditUsername.setText(mContacts.get(mPosition).getUserName());
+		meditDescription.setText(mContacts.get(mPosition).getDecription());
+		rldetailAvatar.setBackgroundResource(mAvatars.get(mPosition));
 		mdetailSave.setOnClickListener(this);
 		mdetailCancel.setOnClickListener(this);
 	}
 
+	/**
+	 * Create event click Cancel, Save Data to Database
+	 */
 	@Override
 	public void onClick(View v) {
+		// TODO Event when click Button
 		switch (v.getId()) {
 		case R.id.tvdetailcancel:
+			// TODO Set event click Cancel to don't save data edit to Database
 			MainActivity.showContactFragment();
 			break;
+
 		case R.id.tvdetailsave:
-			MainActivity.sdata.updateContacts(ContactListAdapter.getContacts().get(mposition).getId(), edteditUsername.getText().toString(), meditDecription.getText().toString());
+			// TODO Set event click Save to save data edit to Database
+			MainActivity.sdata.updateContacts(mContacts.get(mPosition).getId(),
+					meditUsername.getText().toString(), meditDescription
+							.getText().toString());
 			showContactFragment();
 			break;
 
@@ -72,9 +90,16 @@ public class DetailFragment extends Fragment implements OnClickListener {
 		}
 
 	}
+
+	/**
+	 * Display Interface List contacts after completion of operation Show
+	 * ListView with the data has changed
+	 */
 	public static void showContactFragment() {
-		FragmentTransaction fragtst = MainActivity.sfragmentmng.beginTransaction();
-		fragtst.replace(R.id.container_fragment, new ContactsFragment(MainActivity.getAvatars(),MainActivity.getData()));
+		FragmentTransaction fragtst = MainActivity.sfragmentmng
+				.beginTransaction();
+		fragtst.replace(R.id.container_fragment, new ContactsFragment(
+				MainActivity.getAvatars(), MainActivity.getData()));
 		fragtst.commit();
 	}
 }

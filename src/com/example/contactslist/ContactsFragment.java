@@ -17,25 +17,28 @@ public class ContactsFragment extends Fragment {
 	private ListView mlistContact;
 	private ArrayList<Integer> mAvatars;
 	private MyDatabase mdata;
-	/**
-	 * Show List Contacts  
-	 * Get database and Set Adapter for ListView
-	 */
-	public ContactsFragment(ArrayList<Integer> avatars, MyDatabase data){
+	private View mview;
+
+	public ContactsFragment(ArrayList<Integer> avatars, MyDatabase data) {
 		this.mAvatars = avatars;
 		this.mdata = data;
 	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_contact, container,
-				false);
+		mview = inflater.inflate(R.layout.fragment_contact, container, false);
+		init();
+		return mview;
+	}
 
-		mlistContact = (ListView) view.findViewById(R.id.lvcontact);
+	/**
+	 * Init ListView and set Adapter for ListView
+	 */
+	private void init() {
+		mlistContact = (ListView) mview.findViewById(R.id.lvcontact);
 		ContactListAdapter adapter = new ContactListAdapter(
-				(MainActivity) getActivity(), mAvatars,
-				mdata.getContacts());
+				(MainActivity) getActivity(), mAvatars, mdata.getContacts());
 		mlistContact.setAdapter(adapter);
-		return view;
 	}
 }

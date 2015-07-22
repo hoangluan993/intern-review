@@ -469,8 +469,8 @@ int id imgdelete 0x7f05006b
 int id imgedit 0x7f05006a
 int id listMode 0x7f050002
 int id list_item 0x7f05002a
-int id llbutton 0x7f050069
-int id llokcancel 0x7f050055
+int id lldelokcancel 0x7f050055
+int id lleditdel 0x7f050069
 int id lvcontact 0x7f05005a
 int id middle 0x7f050018
 int id multiply 0x7f05000e
@@ -487,8 +487,8 @@ int id rlback 0x7f050051
 int id rldecription 0x7f050062
 int id rldelcancel 0x7f050057
 int id rldelok 0x7f050056
+int id rldetail 0x7f05005b
 int id rldetailavatar 0x7f05005c
-int id rlinfo 0x7f05005b
 int id rlnotice 0x7f050058
 int id rlokcancel 0x7f050053
 int id rlusername 0x7f05005e
