@@ -5,7 +5,7 @@
     android:background="#ffffff" >
 
     <RelativeLayout
-        android:id="@+id/rlsavecancel"
+        android:id="@+id/rlSaveCancel"
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_alignParentBottom="true" >
@@ -23,7 +23,7 @@
             android:weightSum="2" >
 
             <TextView
-                android:id="@+id/tvdetailsave"
+                android:id="@+id/tvDetailSave"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -34,7 +34,7 @@
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/tvdetailcancel"
+                android:id="@+id/tvDetailCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -61,10 +61,9 @@
             android:layout_height="match_parent" >
 
             <RelativeLayout
-                android:id="@+id/rldetail"
+                android:id="@+id/rlDetail"
                 android:layout_width="match_parent"
-                android:layout_height="126dp"
-                android:layout_below="@id/rlactionbar" >
+                android:layout_height="126dp" >
 
                 <RelativeLayout
                     android:layout_width="95dp"
@@ -75,7 +74,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rldetailavatar"
+                    android:id="@+id/rlDetailAvatar"
                     android:layout_width="94.2dp"
                     android:layout_height="94.2dp"
                     android:layout_centerVertical="true"
@@ -84,12 +83,12 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/tvdetailusername"
+                    android:id="@+id/tvDetailUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
-                    android:layout_toRightOf="@id/rldetailavatar"
+                    android:layout_toRightOf="@id/rlDetailAvatar"
                     android:textColor="#505050"
                     android:textSize="22dp" />
 
@@ -101,24 +100,24 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlusername"
+                android:id="@+id/rlUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rldetail"
+                android:layout_below="@id/rlDetail"
                 android:layout_marginTop="22dp"
                 android:background="#f9f9f9" >
 
                 <View
-                    android:id="@+id/viewtopuser"
+                    android:id="@+id/viewTop"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:background="#d1d1d1" />
 
                 <EditText
-                    android:id="@+id/edteditusername"
+                    android:id="@+id/edtEditUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/viewtopuser"
+                    android:layout_below="@id/viewTop"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="13dp"
                     android:layout_marginLeft="20dp"
@@ -133,32 +132,31 @@
                 </EditText>
 
                 <View
-                    android:id="@+id/viewbotuser"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_below="@+id/edteditusername"
+                    android:layout_below="@+id/edtEditUserName"
                     android:background="#d1d1d1" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rldecription"
+                android:id="@+id/rlDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rlusername"
+                android:layout_below="@id/rlUserName"
                 android:layout_marginTop="40dp"
                 android:background="#f9f9f9" >
 
                 <View
-                    android:id="@+id/viewdecrip"
+                    android:id="@+id/viewTopDescrip"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:background="#d1d1d1" />
 
                 <EditText
-                    android:id="@+id/edteditdecription"
+                    android:id="@+id/edtEditDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/viewdecrip"
+                    android:layout_below="@id/viewTopDescrip"
                     android:layout_marginBottom="13dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
@@ -172,7 +170,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_below="@+id/edteditdecription"
+                    android:layout_below="@+id/edtEditDescription"
                     android:background="#d1d1d1" />
             </RelativeLayout>
         </RelativeLayout>

@@ -15,7 +15,7 @@
             ></RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rlavatar"
+            android:id="@+id/rlAvatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_centerVertical="true"
@@ -23,7 +23,7 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/lleditdel"
+            android:id="@+id/llEditdel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -32,7 +32,7 @@
             android:weightSum="2" >
 
             <ImageView
-                android:id="@+id/imgedit"
+                android:id="@+id/imgEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -40,7 +40,7 @@
                 android:src="@drawable/img_edit" />
 
             <ImageView
-                android:id="@+id/imgdelete"
+                android:id="@+id/imgDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="4dp"
@@ -50,14 +50,14 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvusername"
+            android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/lleditdel"
-            android:layout_toRightOf="@id/rlavatar"
+            android:layout_toLeftOf="@id/llEditdel"
+            android:layout_toRightOf="@id/rlAvatar"
             android:textColor="#505050"
             android:textSize="15dp" />
     </RelativeLayout>

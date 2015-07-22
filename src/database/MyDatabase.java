@@ -1,10 +1,11 @@
 /*
  * Create database
  */
-package com.example.contactslist;
+package database;
 
 import java.util.ArrayList;
 
+import model.Contacts;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;

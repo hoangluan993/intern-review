@@ -7,6 +7,7 @@ package com.example.contactslist;
 
 import java.util.ArrayList;
 
+import model.Contacts;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -17,12 +18,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import database.MyDatabase;
 
 public class DetailFragment extends Fragment implements OnClickListener {
 	private TextView mdetailCancel, mdetailSave, mdetailUsername,
 			meditDescription;
 	private EditText meditUsername;
-	private RelativeLayout detailAvatar;
+	private RelativeLayout mdetailAvatar;
 	private ArrayList<Contacts> mContacts;
 	private ArrayList<Integer> mAvatars;
 	private MyDatabase mData;
@@ -52,19 +54,19 @@ public class DetailFragment extends Fragment implements OnClickListener {
 	 * click Cancel and Save
 	 */
 	private void init() {
-		detailAvatar = (RelativeLayout) mView
-				.findViewById(R.id.rldetailavatar);
-		mdetailCancel = (TextView) mView.findViewById(R.id.tvdetailcancel);
-		mdetailSave = (TextView) mView.findViewById(R.id.tvdetailsave);
-		mdetailUsername = (TextView) mView.findViewById(R.id.tvdetailusername);
-		meditUsername = (EditText) mView.findViewById(R.id.edteditusername);
+		mdetailAvatar = (RelativeLayout) mView
+				.findViewById(R.id.rlDetailAvatar);
+		mdetailCancel = (TextView) mView.findViewById(R.id.tvDetailCancel);
+		mdetailSave = (TextView) mView.findViewById(R.id.tvDetailSave);
+		mdetailUsername = (TextView) mView.findViewById(R.id.tvDetailUsername);
+		meditUsername = (EditText) mView.findViewById(R.id.edtEditUserName);
 		meditDescription = (TextView) mView
-				.findViewById(R.id.edteditdecription);
+				.findViewById(R.id.edtEditDescription);
 
 		mdetailUsername.setText(mContacts.get(mPosition).getUserName());
 		meditUsername.setText(mContacts.get(mPosition).getUserName());
 		meditDescription.setText(mContacts.get(mPosition).getDecription());
-		detailAvatar.setBackgroundResource(mAvatars.get(mPosition));
+		mdetailAvatar.setBackgroundResource(mAvatars.get(mPosition));
 		mdetailSave.setOnClickListener(this);
 		mdetailCancel.setOnClickListener(this);
 	}
@@ -76,12 +78,12 @@ public class DetailFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		// TODO Event when click Button
 		switch (v.getId()) {
-		case R.id.tvdetailcancel:
+		case R.id.tvDetailCancel:
 			// TODO Set event click Cancel to don't save data edit to Database
 			showContactFragment(new ContactsFragment(mAvatars, mData));
 			break;
 
-		case R.id.tvdetailsave:
+		case R.id.tvDetailSave:
 			// TODO Set event click Save to save data edit to Database
 			mData.updateContacts(mContacts.get(mPosition).getId(),
 					meditUsername.getText().toString(), meditDescription
@@ -102,7 +104,7 @@ public class DetailFragment extends Fragment implements OnClickListener {
 	public void showContactFragment(Fragment fragment) {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.container_fragment, fragment);
+		fragtst.replace(R.id.frameLayout, fragment);
 		fragtst.commit();
 	}
 }

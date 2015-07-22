@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import database.MyDatabase;
 
 public class ContactsFragment extends Fragment {
 	private ListView mlistContact;
@@ -36,7 +37,7 @@ public class ContactsFragment extends Fragment {
 	 * Init ListView and set Adapter for ListView
 	 */
 	private void init() {
-		mlistContact = (ListView) mView.findViewById(R.id.lvcontact);
+		mlistContact = (ListView) mView.findViewById(R.id.lvContact);
 		ContactListAdapter adapter = new ContactListAdapter(
 				(MainActivity) getActivity(), mAvatars,mData);
 		mlistContact.setAdapter(adapter);

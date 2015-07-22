@@ -4,13 +4,13 @@
     android:layout_height="match_parent" >
 
     <RelativeLayout
-        android:id="@+id/rlactionbar"
+        android:id="@+id/rlActionbar"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="#00bbd2" >
 
         <RelativeLayout
-            android:id="@+id/rlback"
+            android:id="@+id/rlBack"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:background="@drawable/background_pressed"
@@ -33,10 +33,10 @@
     </RelativeLayout>
 
     <FrameLayout
-        android:id="@+id/container_fragment"
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rlactionbar" >
+        android:layout_below="@id/rlActionbar" >
     </FrameLayout>
 
 </RelativeLayout>

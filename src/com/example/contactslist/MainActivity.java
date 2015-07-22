@@ -2,6 +2,7 @@ package com.example.contactslist;
 
 import java.util.ArrayList;
 
+import model.Contacts;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import database.MyDatabase;
 
 public class MainActivity extends Activity implements OnClickListener {
 	public boolean isfragmentDetail = false;
@@ -18,7 +20,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private final int TIME_INTERVAL = 2000;
 	private long mBackPressed;
 	private ArrayList<Integer> mAvatars;
-	public MyDatabase data;
+	public MyDatabase myData;
 
 	/**
 	 * Show ContactsFragment
@@ -28,9 +30,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setDatabase();
-		mcontactsFragment = new ContactsFragment(mAvatars, data);
+		mcontactsFragment = new ContactsFragment(mAvatars, myData);
 		showContact();
-		mbuttonBack = (RelativeLayout) findViewById(R.id.rlback);
+		mbuttonBack = (RelativeLayout) findViewById(R.id.rlBack);
 		mbuttonBack.setOnClickListener(this);
 	}
 
@@ -41,7 +43,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.rlback:
+		case R.id.rlBack:
 			if (isfragmentDetail) {
 				showContact();
 				isfragmentDetail = false;
@@ -57,7 +59,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	public void showContact() {
 		FragmentTransaction fragtst = getFragmentManager().beginTransaction();
-		fragtst.replace(R.id.container_fragment, mcontactsFragment);
+		fragtst.replace(R.id.frameLayout, mcontactsFragment);
 		fragtst.commit();
 	}
 
@@ -105,9 +107,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			mAvatars.add(R.drawable.img_avatar_4);
 			mAvatars.add(R.drawable.img_avatar_5);
 		}
-		data = new MyDatabase(this);
+		myData = new MyDatabase(this);
 		for (int i = 0; i < 20; i++) {
-			data.addContact(new Contacts("" + i, userName + " " + i,
+			myData.addContact(new Contacts("" + i, userName + " " + i,
 					decription + " " + i));
 		}
 	}

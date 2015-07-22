@@ -1,4 +1,4 @@
-package com.example.contactslist;
+package model;
 
 public class Contacts {
 	private String id,userName,decription;

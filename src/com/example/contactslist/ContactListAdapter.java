@@ -5,6 +5,7 @@ package com.example.contactslist;
 
 import java.util.ArrayList;
 
+import model.Contacts;
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import database.MyDatabase;
 
 @SuppressLint("InflateParams")
 public class ContactListAdapter extends BaseAdapter {
@@ -71,13 +73,13 @@ public class ContactListAdapter extends BaseAdapter {
 			convertView = mInflater.inflate(R.layout.item_list_contacts, null);
 			viewHolder = new ViewHolder();
 			viewHolder.rlavatar = (RelativeLayout) convertView
-					.findViewById(R.id.rlavatar);
+					.findViewById(R.id.rlAvatar);
 			viewHolder.userName = (TextView) convertView
-					.findViewById(R.id.tvusername);
+					.findViewById(R.id.tvUserName);
 			viewHolder.btnEdit = (ImageView) convertView
-					.findViewById(R.id.imgedit);
+					.findViewById(R.id.imgEdit);
 			viewHolder.btnDelete = (ImageView) convertView
-					.findViewById(R.id.imgdelete);
+					.findViewById(R.id.imgDelete);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -117,7 +119,7 @@ public class ContactListAdapter extends BaseAdapter {
 	private void showDetail(int position) {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.container_fragment, new DetailFragment(mContext,position, mAvatars, mData));
+		fragtst.replace(R.id.frameLayout, new DetailFragment(mContext,position, mAvatars, mData));
 		fragtst.commit();
 	}
 

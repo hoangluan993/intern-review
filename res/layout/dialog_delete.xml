@@ -10,7 +10,7 @@
         android:background="@drawable/bg_dialog_delete" >
 
         <RelativeLayout
-            android:id="@+id/rlokcancel"
+            android:id="@+id/rlOkCancel"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true" >
@@ -22,7 +22,6 @@
                 android:background="#b0b0b5" />
 
             <LinearLayout
-                android:id="@+id/lldelokcancel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/viewtop"
@@ -30,7 +29,7 @@
                 android:weightSum="2" >
 
                 <RelativeLayout
-                    android:id="@+id/rldelok"
+                    android:id="@+id/rlDeleteOk"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1" >
@@ -45,7 +44,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rldelcancel"
+                    android:id="@+id/rlDeleteCancel"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1" >
@@ -68,10 +67,9 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rlnotice"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/rlokcancel" >
+            android:layout_above="@id/rlOkCancel" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -104,7 +102,7 @@
                         android:textSize="20dp" />
 
                     <TextView
-                        android:id="@+id/tvdelusername"
+                        android:id="@+id/tvDeleteUsername"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

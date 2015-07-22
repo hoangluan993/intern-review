@@ -7,6 +7,7 @@ package com.example.contactslist;
 
 import java.util.ArrayList;
 
+import model.Contacts;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import database.MyDatabase;
 
 public class DeleteDialogFragment extends DialogFragment implements
 		OnClickListener {
@@ -60,10 +62,10 @@ public class DeleteDialogFragment extends DialogFragment implements
 	 */
 
 	private void init() {
-		mdelCancel = (RelativeLayout) mView.findViewById(R.id.rldelcancel);
-		mdelOk = (RelativeLayout) mView.findViewById(R.id.rldelok);
+		mdelCancel = (RelativeLayout) mView.findViewById(R.id.rlDeleteCancel);
+		mdelOk = (RelativeLayout) mView.findViewById(R.id.rlDeleteOk);
 
-		mdelUserName = (TextView) mView.findViewById(R.id.tvdelusername);
+		mdelUserName = (TextView) mView.findViewById(R.id.tvDeleteUsername);
 		mdelUserName.setText(mContacts.get(mPosition).getUserName());
 
 		mdelCancel.setOnClickListener(this);
@@ -77,12 +79,12 @@ public class DeleteDialogFragment extends DialogFragment implements
 	public void onClick(View v) {
 		// TODO Event when click Button
 		switch (v.getId()) {
-		case R.id.rldelcancel:
+		case R.id.rlDeleteCancel:
 			// TODO Set event click button Cancel in dialog DELETE
 			DeleteDialogFragment.this.dismiss();
 			break;
 
-		case R.id.rldelok:
+		case R.id.rlDeleteOk:
 			// TODO Set event click button OK in dialog DELETE
 			mData.deleteContacts(mContacts.get(mPosition)
 					.getUserName());
@@ -102,7 +104,7 @@ public class DeleteDialogFragment extends DialogFragment implements
 	public void showContactFragment() {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.container_fragment, new ContactsFragment(mAvatars, mData));
+		fragtst.replace(R.id.frameLayout, new ContactsFragment(mAvatars, mData));
 		fragtst.commit();
 	}
 
