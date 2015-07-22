@@ -5,122 +5,7 @@
     android:background="#ffffff" >
 
     <RelativeLayout
-        android:id="@+id/rldetail"
-        android:layout_width="match_parent"
-        android:layout_height="126dp"
-        android:layout_below="@id/rlactionbar" >
-
-        <RelativeLayout
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/ic_eclipse_detail" >
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rldetailavatar"
-            android:layout_width="94.2dp"
-            android:layout_height="94.2dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20.35dp"
-            android:background="@drawable/img_avatar_2" >
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tvdetailusername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="25dp"
-            android:layout_toRightOf="@id/rldetailavatar"
-            android:textColor="#505050"
-            android:textSize="22dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_alignParentBottom="true"
-            android:background="#d1d1d1" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rlusername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rldetail"
-        android:layout_marginTop="22dp"
-        android:background="#f9f9f9" >
-
-        <View
-            android:id="@+id/viewtopuser"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#d1d1d1" />
-
-        <EditText
-            android:id="@+id/edteditusername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/viewtopuser"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="13dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="13dp"
-            android:background="#f9f9f9"
-            android:hint="Enter User Name"
-            android:textColor="#000000"
-            android:textColorHint="#626262"
-            android:textCursorDrawable="@null"
-            android:textSize="18dp" >
-        </EditText>
-
-        <View
-            android:id="@+id/viewbotuser"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/edteditusername"
-            android:background="#d1d1d1" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rldecription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rlusername"
-        android:layout_marginTop="40dp"
-        android:background="#f9f9f9" >
-
-        <View
-            android:id="@+id/viewdecrip"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#d1d1d1" />
-
-        <EditText
-            android:id="@+id/edteditdecription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/viewdecrip"
-            android:layout_marginBottom="13dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="13dp"
-            android:background="@drawable/background_editext"
-            android:hint="Enter Decription"
-            android:textColor="#000000"
-            android:textColorHint="#626262"
-            android:textCursorDrawable="@null" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/edteditdecription"
-            android:background="#d1d1d1" />
-    </RelativeLayout>
-
-    <RelativeLayout
+        android:id="@+id/rlsavecancel"
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_alignParentBottom="true" >
@@ -166,5 +51,131 @@
             android:layout_centerHorizontal="true"
             android:background="#d1d1d1" />
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/rldetail"
+                android:layout_width="match_parent"
+                android:layout_height="126dp"
+                android:layout_below="@id/rlactionbar" >
+
+                <RelativeLayout
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/ic_eclipse_detail" >
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rldetailavatar"
+                    android:layout_width="94.2dp"
+                    android:layout_height="94.2dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20.35dp"
+                    android:background="@drawable/img_avatar_2" >
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvdetailusername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_toRightOf="@id/rldetailavatar"
+                    android:textColor="#505050"
+                    android:textSize="22dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#d1d1d1" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlusername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rldetail"
+                android:layout_marginTop="22dp"
+                android:background="#f9f9f9" >
+
+                <View
+                    android:id="@+id/viewtopuser"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#d1d1d1" />
+
+                <EditText
+                    android:id="@+id/edteditusername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/viewtopuser"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="13dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="13dp"
+                    android:background="#f9f9f9"
+                    android:hint="Enter User Name"
+                    android:textColor="#000000"
+                    android:textColorHint="#626262"
+                    android:textCursorDrawable="@null"
+                    android:textSize="18dp" >
+                </EditText>
+
+                <View
+                    android:id="@+id/viewbotuser"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/edteditusername"
+                    android:background="#d1d1d1" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rldecription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rlusername"
+                android:layout_marginTop="40dp"
+                android:background="#f9f9f9" >
+
+                <View
+                    android:id="@+id/viewdecrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#d1d1d1" />
+
+                <EditText
+                    android:id="@+id/edteditdecription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/viewdecrip"
+                    android:layout_marginBottom="13dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="13dp"
+                    android:background="@drawable/background_editext"
+                    android:hint="Enter Decription"
+                    android:textColor="#000000"
+                    android:textColorHint="#626262"
+                    android:textCursorDrawable="@null" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/edteditdecription"
+                    android:background="#d1d1d1" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
