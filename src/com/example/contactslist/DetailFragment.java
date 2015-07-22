@@ -22,16 +22,20 @@ public class DetailFragment extends Fragment implements OnClickListener {
 	private TextView mdetailCancel, mdetailSave, mdetailUsername,
 			meditDescription;
 	private EditText meditUsername;
-	private RelativeLayout rldetailAvatar;
+	private RelativeLayout detailAvatar;
 	private ArrayList<Contacts> mContacts;
 	private ArrayList<Integer> mAvatars;
+	private MyDatabase mData;
 	private int mPosition;
 	private View mView;
+	private MainActivity mContext;
 
-	public DetailFragment(int position, ArrayList<Contacts> contacts,
-			ArrayList<Integer> avatar) {
+	public DetailFragment(MainActivity context,int position,
+			ArrayList<Integer> avatar, MyDatabase data) {
+		this.mContext = context;
 		this.mPosition = position;
-		this.mContacts = contacts;
+		this.mContacts = data.getContacts();
+		this.mData = data;
 		this.mAvatars = avatar;
 	}
 
@@ -48,7 +52,7 @@ public class DetailFragment extends Fragment implements OnClickListener {
 	 * click Cancel and Save
 	 */
 	private void init() {
-		rldetailAvatar = (RelativeLayout) mView
+		detailAvatar = (RelativeLayout) mView
 				.findViewById(R.id.rldetailavatar);
 		mdetailCancel = (TextView) mView.findViewById(R.id.tvdetailcancel);
 		mdetailSave = (TextView) mView.findViewById(R.id.tvdetailsave);
@@ -60,7 +64,7 @@ public class DetailFragment extends Fragment implements OnClickListener {
 		mdetailUsername.setText(mContacts.get(mPosition).getUserName());
 		meditUsername.setText(mContacts.get(mPosition).getUserName());
 		meditDescription.setText(mContacts.get(mPosition).getDecription());
-		rldetailAvatar.setBackgroundResource(mAvatars.get(mPosition));
+		detailAvatar.setBackgroundResource(mAvatars.get(mPosition));
 		mdetailSave.setOnClickListener(this);
 		mdetailCancel.setOnClickListener(this);
 	}
@@ -74,15 +78,15 @@ public class DetailFragment extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.tvdetailcancel:
 			// TODO Set event click Cancel to don't save data edit to Database
-			MainActivity.showContactFragment();
+			showContactFragment(new ContactsFragment(mAvatars, mData));
 			break;
 
 		case R.id.tvdetailsave:
 			// TODO Set event click Save to save data edit to Database
-			MainActivity.sdata.updateContacts(mContacts.get(mPosition).getId(),
+			mData.updateContacts(mContacts.get(mPosition).getId(),
 					meditUsername.getText().toString(), meditDescription
 							.getText().toString());
-			showContactFragment();
+			showContactFragment(new ContactsFragment(mAvatars, mData));
 			break;
 
 		default:
@@ -95,11 +99,10 @@ public class DetailFragment extends Fragment implements OnClickListener {
 	 * Display Interface List contacts after completion of operation Show
 	 * ListView with the data has changed
 	 */
-	public static void showContactFragment() {
-		FragmentTransaction fragtst = MainActivity.sfragmentmng
+	public void showContactFragment(Fragment fragment) {
+		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.container_fragment, new ContactsFragment(
-				MainActivity.getAvatars(), MainActivity.getData()));
+		fragtst.replace(R.id.container_fragment, fragment);
 		fragtst.commit();
 	}
 }

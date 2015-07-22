@@ -20,10 +20,11 @@ import android.widget.TextView;
 @SuppressLint("InflateParams")
 public class ContactListAdapter extends BaseAdapter {
 
-	private static ArrayList<Integer> sAvatars;
-	private static ArrayList<Contacts> sContacts;
+	private ArrayList<Integer> mAvatars;
+	private ArrayList<Contacts> mContacts;
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
+	private MyDatabase mData;
 
 	/**
 	 * @param context
@@ -35,23 +36,23 @@ public class ContactListAdapter extends BaseAdapter {
 	 * @param mUserNames
 	 *            ArrayList<String> set UserName for Contacts
 	 */
-	public ContactListAdapter(MainActivity context, ArrayList<Integer> avatars,
-			ArrayList<Contacts> contacts) {
+	public ContactListAdapter(MainActivity context, ArrayList<Integer> avatars, MyDatabase data) {
 		this.mContext = context;
-		ContactListAdapter.sAvatars = avatars;
-		ContactListAdapter.sContacts = contacts;
+		mAvatars = avatars;
+		mContacts = data.getContacts();
+		this.mData = data;
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
 	public int getCount() {
-		return getContacts().size();
+		return mContacts.size();
 	}
 
 	@Override
 	public String getItem(int position) {
-		return getContacts().get(position).getUserName();
+		return mContacts.get(position).getUserName();
 	}
 
 	@Override
@@ -82,21 +83,21 @@ public class ContactListAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.rlavatar.setBackgroundResource(getAvatars().get(position));
-		viewHolder.userName.setText(getContacts().get(position).getUserName());
+		viewHolder.rlavatar.setBackgroundResource(mAvatars.get(position));
+		viewHolder.userName.setText(mContacts.get(position).getUserName());
 		viewHolder.btnEdit.setOnClickListener(new OnClickListener() {
-			// TODO Set event click ImageView Edit
+			// TODO Set event click button Edit
 			@Override
 			public void onClick(View v) {
-				MainActivity.scheckBack = true;
-				showDetailFragment(position);
+				mContext.isfragmentDetail = true;
+				showDetail(position);
 			}
 		});
 		viewHolder.btnDelete.setOnClickListener(new OnClickListener() {
-			// TODO Set event click ImageView Delete
+			// TODO Set event click button Delete
 			@Override
 			public void onClick(View v) {
-				new DeleteDialogFragment(position, getContacts()).show(
+				new DeleteDialogFragment(mContext, position, mAvatars, mData).show(
 						mContext.getFragmentManager(), "dialog");
 			}
 		});
@@ -113,29 +114,11 @@ public class ContactListAdapter extends BaseAdapter {
 	/**
 	 * show Interface Edit Detail Fragment
 	 */
-	private void showDetailFragment(int position) {
+	private void showDetail(int position) {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.container_fragment, new DetailFragment(position,
-				getContacts(), getAvatars()));
+		fragtst.replace(R.id.container_fragment, new DetailFragment(mContext,position, mAvatars, mData));
 		fragtst.commit();
 	}
 
-	/**
-	 * Get avatar for contacts From ArrayList
-	 * 
-	 * @return ArrayList<Integer> sAvatars
-	 */
-	public static ArrayList<Integer> getAvatars() {
-		return sAvatars;
-	}
-
-	/**
-	 * Get information Contacts
-	 * 
-	 * @return ArrayList<Contacts> sContacts
-	 */
-	public static ArrayList<Contacts> getContacts() {
-		return sContacts;
-	}
 }

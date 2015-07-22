@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
@@ -13,14 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
-	public static FragmentManager sfragmentmng;
-	private RelativeLayout mrlBack;
-	public static boolean scheckBack = false;
-	public static Fragment sfragment;
-	private static final int TIME_INTERVAL = 2000;
+	public boolean isfragmentDetail = false;
+	private RelativeLayout mbuttonBack;
+	private Fragment mcontactsFragment;
+	private final int TIME_INTERVAL = 2000;
 	private long mBackPressed;
-	private static ArrayList<Integer> sAvatars;
-	public static MyDatabase sdata;
+	private ArrayList<Integer> mAvatars;
+	public MyDatabase data;
 
 	/**
 	 * Show ContactsFragment
@@ -30,11 +28,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setDatabase();
-		sfragmentmng = getFragmentManager();
-		sfragment = new ContactsFragment(getAvatars(), getData());
-		showContactFragment();
-		mrlBack = (RelativeLayout) findViewById(R.id.rlback);
-		mrlBack.setOnClickListener(this);
+		mcontactsFragment = new ContactsFragment(mAvatars, data);
+		showContact();
+		mbuttonBack = (RelativeLayout) findViewById(R.id.rlback);
+		mbuttonBack.setOnClickListener(this);
 	}
 
 	/**
@@ -45,9 +42,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.rlback:
-			if (scheckBack) {
-				showContactFragment();
-				scheckBack = false;
+			if (isfragmentDetail) {
+				showContact();
+				isfragmentDetail = false;
 			} else {
 				setDoubleClick();
 			}
@@ -58,9 +55,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	public static void showContactFragment() {
-		FragmentTransaction fragtst = sfragmentmng.beginTransaction();
-		fragtst.replace(R.id.container_fragment, sfragment);
+	public void showContact() {
+		FragmentTransaction fragtst = getFragmentManager().beginTransaction();
+		fragtst.replace(R.id.container_fragment, mcontactsFragment);
 		fragtst.commit();
 	}
 
@@ -69,9 +66,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	 */
 	@Override
 	public void onBackPressed() {
-		if (scheckBack) {
-			showContactFragment();
-			scheckBack = false;
+		if (isfragmentDetail) {
+			showContact();
+			isfragmentDetail = false;
 		} else {
 			setDoubleClick();
 		}
@@ -100,26 +97,18 @@ public class MainActivity extends Activity implements OnClickListener {
 	private void setDatabase() {
 		String userName = "Hoang Luan";
 		String decription = "DECRIPTION";
-		sAvatars = new ArrayList<Integer>();
+		mAvatars = new ArrayList<Integer>();
 		for (int i = 0; i < 4; i++) {
-			sAvatars.add(R.drawable.img_avatar_1);
-			sAvatars.add(R.drawable.img_avatar_2);
-			sAvatars.add(R.drawable.img_avatar_3);
-			sAvatars.add(R.drawable.img_avatar_4);
-			sAvatars.add(R.drawable.img_avatar_5);
+			mAvatars.add(R.drawable.img_avatar_1);
+			mAvatars.add(R.drawable.img_avatar_2);
+			mAvatars.add(R.drawable.img_avatar_3);
+			mAvatars.add(R.drawable.img_avatar_4);
+			mAvatars.add(R.drawable.img_avatar_5);
 		}
-		sdata = new MyDatabase(this);
+		data = new MyDatabase(this);
 		for (int i = 0; i < 20; i++) {
-			sdata.addContact(new Contacts("" + i, userName + " " + i,
+			data.addContact(new Contacts("" + i, userName + " " + i,
 					decription + " " + i));
 		}
-	}
-
-	public static ArrayList<Integer> getAvatars() {
-		return sAvatars;
-	}
-
-	public static MyDatabase getData() {
-		return sdata;
 	}
 }

@@ -24,12 +24,18 @@ public class DeleteDialogFragment extends DialogFragment implements
 	private TextView mdelUserName;
 	private AlertDialog.Builder mBuilder;
 	private ArrayList<Contacts> mContacts;
+	private ArrayList<Integer> mAvatars;
 	private int mPosition;
 	private View mView;
+	private MyDatabase mData;
+	private MainActivity mContext;
 
-	public DeleteDialogFragment(int position, ArrayList<Contacts> contacts) {
+	public DeleteDialogFragment(MainActivity context,int position, ArrayList<Integer> avatars, MyDatabase data) {
 		mPosition = position;
-		this.mContacts = contacts;
+		this.mContacts = data.getContacts();
+		this.mAvatars = avatars;
+		this.mData = data;
+		this.mContext =  context;
 	}
 
 	/**
@@ -78,7 +84,7 @@ public class DeleteDialogFragment extends DialogFragment implements
 
 		case R.id.rldelok:
 			// TODO Set event click button OK in dialog DELETE
-			MainActivity.sdata.deleteContacts(mContacts.get(mPosition)
+			mData.deleteContacts(mContacts.get(mPosition)
 					.getUserName());
 			DeleteDialogFragment.this.dismiss();
 			showContactFragment();
@@ -94,10 +100,9 @@ public class DeleteDialogFragment extends DialogFragment implements
 	 * Show Interface List Contacts Fragment
 	 */
 	public void showContactFragment() {
-		FragmentTransaction fragtst = MainActivity.sfragmentmng
+		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.container_fragment, new ContactsFragment(
-				MainActivity.getAvatars(), MainActivity.getData()));
+		fragtst.replace(R.id.container_fragment, new ContactsFragment(mAvatars, mData));
 		fragtst.commit();
 	}
 
