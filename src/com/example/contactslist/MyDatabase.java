@@ -93,10 +93,14 @@ public class MyDatabase {
 
 		return contacts;
 	}
-
-	public Contacts getContact(int id) {
-		// TODO get a contact from database by ID
-
-		return null;
+	public void deleteContacts(String contacts){
+		mData.execSQL("DELETE FROM contacts WHERE username='"
+				+ contacts + "'");
 	}
+	public void updateContacts(String id,String userName, String description){
+		mData.execSQL("UPDATE contacts SET username='" + userName
+				+ "',dicription='" + description
+				+ "' WHERE id='"+id+ "'");
+	}
+	
 }

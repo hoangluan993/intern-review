@@ -24,7 +24,6 @@ public class ContactListAdapter extends BaseAdapter {
 	private static ArrayList<Contacts> sContacts;
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
-	public static int sVitri;
 	/**
 	 * @param context
 	 *            application context
@@ -38,15 +37,15 @@ public class ContactListAdapter extends BaseAdapter {
 	public ContactListAdapter(MainActivity context,
 			ArrayList<Integer> avatars, ArrayList<Contacts> contacts) {
 		this.mContext = context;
-		this.sAvatars = avatars;
-		this.sContacts = contacts;
+		ContactListAdapter.sAvatars = avatars;
+		ContactListAdapter.sContacts = contacts;
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
 	public int getCount() {
-		return getAvatars().size();
+		return getContacts().size();
 	}
 
 	@Override
@@ -85,17 +84,15 @@ public class ContactListAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				MainActivity.scheckBack = true;
-				showDetailFragment();
-				sVitri= position;
+				showDetailFragment(position);
 			}
 		});
 		viewHolder.btnDelete.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				new DeleteDialogFragment().show(mContext.getFragmentManager(),
+				new DeleteDialogFragment(position,getContacts()).show(mContext.getFragmentManager(),
 						"dialog");
-				sVitri= position;
 			}
 		});
 		
@@ -110,10 +107,10 @@ public class ContactListAdapter extends BaseAdapter {
 	/**
 	 * show Detail Fragment
 	 */
-	private void showDetailFragment() {
+	private void showDetailFragment(int position) {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.container_fragment, new DetailFragment());
+		fragtst.replace(R.id.container_fragment, new DetailFragment(position,getContacts()));
 		fragtst.commit();
 	}
 

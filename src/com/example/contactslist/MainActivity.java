@@ -13,14 +13,14 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
-	private static FragmentManager sfragmentmng;
+	public static FragmentManager sfragmentmng;
 	private RelativeLayout mrlBack;
 	public static boolean scheckBack = false;
 	public static Fragment sfragment;
 	private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
 	private long mBackPressed;
 	private static ArrayList<Integer> sAvatars;
-	private static MyDatabase sdata;
+	public static MyDatabase sdata;
 
 	/**
 	 * Show ContactsFragment
@@ -31,7 +31,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 		setDatabase();
 		sfragmentmng = getFragmentManager();
-		sfragment = new ContactsFragment();
+		sfragment = new ContactsFragment(getAvatars(),getData());
 		showContactFragment();
 		mrlBack = (RelativeLayout) findViewById(R.id.rlback);
 		mrlBack.setOnClickListener(this);

@@ -7,7 +7,6 @@ package com.example.contactslist;
 import java.util.ArrayList;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,17 +15,16 @@ import android.widget.ListView;
 
 public class ContactsFragment extends Fragment {
 	private ListView mlistContact;
-	private MainActivity mContext;
 	private ArrayList<Integer> mAvatars;
 	private MyDatabase mdata;
 	/**
-	 * Show List Contacts Create and Set Adapter for ListView
+	 * Show List Contacts  
+	 * Get database and Set Adapter for ListView
 	 */
-//	public ContactsFragment(Ma context, ArrayList<Integer> avatars, MyDatabase data){
-//		this.mContext = context;
-//		this.mAvatars = avatars;
-//		this.mdata = data;
-//	}
+	public ContactsFragment(ArrayList<Integer> avatars, MyDatabase data){
+		this.mAvatars = avatars;
+		this.mdata = data;
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -35,8 +33,8 @@ public class ContactsFragment extends Fragment {
 
 		mlistContact = (ListView) view.findViewById(R.id.lvcontact);
 		ContactListAdapter adapter = new ContactListAdapter(
-				(MainActivity) getActivity(), MainActivity.getAvatars(),
-				MainActivity.getData().getContacts());
+				(MainActivity) getActivity(), mAvatars,
+				mdata.getContacts());
 		mlistContact.setAdapter(adapter);
 		return view;
 	}
