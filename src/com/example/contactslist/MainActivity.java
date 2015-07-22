@@ -9,20 +9,18 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
-	public static FragmentManager sfragmentmng;
+	private static FragmentManager sfragmentmng;
 	private RelativeLayout mrlBack;
 	public static boolean scheckBack = false;
 	public static Fragment sfragment;
 	private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
 	private long mBackPressed;
-	public static ArrayList<Integer> sAvatars;
-//	public static ArrayList<Contacts> suserName;
-	public static MyDatabase data;
+	private static ArrayList<Integer> sAvatars;
+	private static MyDatabase sdata;
 
 	/**
 	 * Show ContactsFragment
@@ -78,17 +76,31 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	    mBackPressed = System.currentTimeMillis();
 	};
+	/**
+	 * Init values for ArrayList mAvatars.
+	 * Create Database and set values for database
+	 */
 	private void setDatabase(){
 		String userName = "Hoang Luan";
 		String decription = "DECRIPTION";
 		sAvatars = new ArrayList<Integer>();
-		for (int i = 0; i < 20; i++) {
-			sAvatars.add(R.drawable.img_avatar_1);
+		for (int i = 0; i < 4; i++) {
+		sAvatars.add(R.drawable.img_avatar_1);
+		sAvatars.add(R.drawable.img_avatar_2);
+		sAvatars.add(R.drawable.img_avatar_3);
+		sAvatars.add(R.drawable.img_avatar_4);
+		sAvatars.add(R.drawable.img_avatar_5);
 		}
-
-		data = new MyDatabase(this);
+		sdata = new MyDatabase(this);
 		for(int i=0;i<20;i++){
-			data.addContact(new Contacts(""+i, userName, decription));
+			sdata.addContact(new Contacts(""+i, userName+" "+i, decription+" "+i));
 		}
+	}
+	
+	public static ArrayList<Integer> getAvatars() {
+		return sAvatars;
+	}
+	public static MyDatabase getData() {
+		return sdata;
 	}
 }

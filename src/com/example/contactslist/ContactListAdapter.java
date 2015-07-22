@@ -20,8 +20,8 @@ import android.widget.TextView;
 @SuppressLint("InflateParams")
 public class ContactListAdapter extends BaseAdapter {
 
-	public static ArrayList<Integer> sAvatars;
-	public static ArrayList<Contacts> suserNames;
+	private static ArrayList<Integer> sAvatars;
+	private static ArrayList<Contacts> sContacts;
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
 	public static int sVitri;
@@ -36,22 +36,22 @@ public class ContactListAdapter extends BaseAdapter {
 	 *            ArrayList<String> set UserName for Contacts
 	 */
 	public ContactListAdapter(MainActivity context,
-			ArrayList<Integer> mAvatars, ArrayList<Contacts> mUserNames) {
+			ArrayList<Integer> avatars, ArrayList<Contacts> contacts) {
 		this.mContext = context;
-		this.sAvatars = mAvatars;
-		this.suserNames = mUserNames;
+		this.sAvatars = avatars;
+		this.sContacts = contacts;
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
 	public int getCount() {
-		return sAvatars.size();
+		return getAvatars().size();
 	}
 
 	@Override
 	public String getItem(int position) {
-		return suserNames.get(position).getUserName();
+		return getContacts().get(position).getUserName();
 	}
 
 	@Override
@@ -78,8 +78,8 @@ public class ContactListAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.rlavatar.setBackgroundResource(sAvatars.get(position));
-		viewHolder.userName.setText(suserNames.get(position).getUserName());
+		viewHolder.rlavatar.setBackgroundResource(getAvatars().get(position));
+		viewHolder.userName.setText(getContacts().get(position).getUserName());
 		viewHolder.btnEdit.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -111,10 +111,17 @@ public class ContactListAdapter extends BaseAdapter {
 	 * show Detail Fragment
 	 */
 	private void showDetailFragment() {
-		FragmentTransaction fragtst = MainActivity.sfragmentmng
+		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
 		fragtst.replace(R.id.container_fragment, new DetailFragment());
 		fragtst.commit();
 	}
 
+	public static ArrayList<Integer> getAvatars() {
+		return sAvatars;
+	}
+
+	public static ArrayList<Contacts> getContacts() {
+		return sContacts;
+	}
 }

@@ -15,6 +15,13 @@ public class MyDatabase {
 	public MyDatabase(Context context) {
 		mData = context.openOrCreateDatabase("MyContacts.db",
 				Activity.MODE_PRIVATE, null);
+		
+		String drop = "drop table contacts";
+		try{
+			mData.execSQL(drop);
+		} catch (SQLException ex){
+			
+		}
 
 		String sql = "create table contacts (";
 		sql += "id text primary key,";

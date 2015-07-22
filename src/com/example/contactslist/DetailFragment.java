@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DetailFragment extends Fragment implements OnClickListener {
-	private TextView mdetailCancel,mdetailUsername;
+	private TextView mdetailCancel, mdetailUsername, mdetaildecription;
 	private EditText edteditUsername;
 	private RelativeLayout rldetailAvatar;
 
@@ -29,10 +29,12 @@ public class DetailFragment extends Fragment implements OnClickListener {
 		mdetailUsername = (TextView) view.findViewById(R.id.tvdetailusername);
 		edteditUsername = (EditText) view.findViewById(R.id.edteditusername);
 		rldetailAvatar = (RelativeLayout) view.findViewById(R.id.rldetailavatar);
+		mdetaildecription = (TextView) view.findViewById(R.id.tvdecription);
 		
-		mdetailUsername.setText(ContactListAdapter.suserNames.get(ContactListAdapter.sVitri).getUserName());
-		edteditUsername.setText(ContactListAdapter.suserNames.get(ContactListAdapter.sVitri).getUserName());
-		rldetailAvatar.setBackgroundResource(ContactListAdapter.sAvatars.get(ContactListAdapter.sVitri));
+		mdetailUsername.setText(ContactListAdapter.getContacts().get(ContactListAdapter.sVitri).getUserName());
+		edteditUsername.setText(ContactListAdapter.getContacts().get(ContactListAdapter.sVitri).getUserName());
+		mdetaildecription.setText(ContactListAdapter.getContacts().get(ContactListAdapter.sVitri).getDecription());
+		rldetailAvatar.setBackgroundResource(ContactListAdapter.getAvatars().get(ContactListAdapter.sVitri));
 		mdetailCancel.setOnClickListener(this);
 		return view;
 	}
