@@ -1,18 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="match_parent" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="73.5dp" >
-        <RelativeLayout 
+
+        <RelativeLayout
             android:layout_width="49dp"
             android:layout_height="49dp"
-            android:background="@drawable/ic_ellipse"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            ></RelativeLayout>
+            android:background="@drawable/ic_ellipse" >
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rlAvatar"
@@ -37,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:src="@drawable/img_edit" />
+                android:src="@drawable/img_edit" 
+                android:background="@drawable/background_edit_delete_pressed"/>
 
             <ImageView
                 android:id="@+id/imgDelete"
@@ -46,7 +48,8 @@
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:src="@drawable/img_delete" />
+                android:src="@drawable/img_delete" 
+                android:background="@drawable/background_edit_delete_pressed"/>
         </LinearLayout>
 
         <TextView
@@ -58,8 +61,8 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/llEditdel"
             android:layout_toRightOf="@id/rlAvatar"
-            android:textColor="#505050"
-            android:textSize="15dp" />
+            android:textColor="@color/textview.item_list_contacts"
+            android:textSize="15sp" />
     </RelativeLayout>
 
 </RelativeLayout>

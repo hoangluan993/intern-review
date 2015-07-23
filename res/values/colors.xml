@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_pressed">#f2f2f2</color>
-      <color name="background_dontpressed">#ffffff</color>
+    <color name="background_back_pressed">#f2f2f2</color>
+    <color name="background_back_nopressed">#00bbd2</color>
+    <color name="background_save_cancel_pressed">#6633B5E5</color>
+    <color name="background_ok_cancel_pressed">#6633B5E5</color>
+    <color name="background_edit_delete_pressed">#6633B5E5</color>
+    <color name="background_dontpressed">#ffffff</color>
+    <color name="background.view">#b0b0b5</color>
+    <color name="background.actionbar">#00bbd2</color>
+    <color name="background.dialog">#20ffffff</color>
+    <color name="background.edittext.detail">#f9f9f9</color>
+    <color name="background.textview.save_cancel">#ffffff</color>
+    <color name="background.textview.ok_cancel">#20ffffff</color>
+    <color name="textview.save_cacel">#007aff</color>
+    <color name="textview.ok_cancel">#007aff</color>
+    <color name="textview.item_list_contacts">#505050</color>
+    <color name="textview.message_dialog">#b0b0b5</color>
+    <color name="textview.detail_username">#505050</color>
+    <color name="edittext.detail_edit">#626262</color>
+    <color name="edittext.text_hint">#626262</color>
 </resources>

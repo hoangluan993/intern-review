@@ -24,8 +24,9 @@ public class ContactsFragment extends Fragment {
 	private ListView mlistContact;
 	private MyDatabase mData;
 	private View mView;
+	private int mPositionContacts;
 	private MainActivity mContext;
-	private ContactListAdapter mAdapter;
+	public static ContactListAdapter mAdapter;
 	private ProgressDialog mProgressDialog;
 	// Set the limit for load more
 	public int limit = 20;
@@ -42,6 +43,10 @@ public class ContactsFragment extends Fragment {
 		mView = inflater.inflate(R.layout.fragment_contact, container, false);
 		new LoadMoreTask().execute();
 		return mView;
+	}
+
+	public void setPositionContact(int position) {
+		this.mPositionContacts = position;
 	}
 
 	/**
@@ -62,7 +67,7 @@ public class ContactsFragment extends Fragment {
 			// Locate the ListView in fragment_contact.xml
 			mlistContact = (ListView) mView.findViewById(R.id.lvContact);
 			mAdapter = new ContactListAdapter((MainActivity) getActivity(),
-					mData);
+					mData, ContactsFragment.this);
 			mlistContact.setAdapter(mAdapter);
 			mlistContact.setOnScrollListener(new OnScrollListener() {
 
@@ -135,12 +140,26 @@ public class ContactsFragment extends Fragment {
 		protected void onPostExecute(Void result) {
 			// After adding data elements to Get and add ListView
 			int position = mlistContact.getLastVisiblePosition();
-			mAdapter = new ContactListAdapter(mContext, mData);
+			mAdapter = new ContactListAdapter(mContext, mData,
+					ContactsFragment.this);
 			mlistContact.setAdapter(mAdapter);
 			mlistContact.setSelectionFromTop(position, 0);
 			mProgressDialog.dismiss();
 		}
 
+	}
+
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		String mgetAction = (String) v.getTag();
+
+		if (mgetAction.equals("edit")) {
+			// TODO edit contact profile
+			mContext.showDetail(mPositionContacts);
+		} else {
+			// TODO delete contact
+			mContext.showDelete(mPositionContacts);
+		}
 	}
 
 }

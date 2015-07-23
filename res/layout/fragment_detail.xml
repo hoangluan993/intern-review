@@ -14,7 +14,7 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#d1d1d1" />
+            android:background="@color/background.view" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,41 +24,43 @@
 
             <TextView
                 android:id="@+id/tvDetailSave"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#ffffff"
+                android:background="@drawable/background_save_cancel_pressed"
                 android:gravity="center"
-                android:text="Save"
-                android:textColor="#007aff"
-                android:textSize="15dp" />
+                android:text="@string/textview_save"
+                android:textColor="@color/textview.save_cacel"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvDetailCancel"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#ffffff"
+                android:background="@drawable/background_save_cancel_pressed"
                 android:gravity="center"
-                android:text="Cancel"
-                android:textColor="#007aff"
-                android:textSize="15dp" />
+                android:text="@string/textview_cancel"
+                android:textColor="@color/textview.save_cacel"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <View
             android:layout_width="0.5dp"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:background="#d1d1d1" />
+            android:background="@color/background.view" />
     </RelativeLayout>
 
     <ScrollView
+        android:layout_above="@id/rlSaveCancel"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content" >
 
             <RelativeLayout
                 android:id="@+id/rlDetail"
@@ -89,14 +91,14 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:layout_toRightOf="@id/rlDetailAvatar"
-                    android:textColor="#505050"
-                    android:textSize="22dp" />
+                    android:textColor="@color/textview.detail_username"
+                    android:textSize="22sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_alignParentBottom="true"
-                    android:background="#d1d1d1" />
+                    android:background="@color/background.view" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -105,13 +107,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rlDetail"
                 android:layout_marginTop="22dp"
-                android:background="#f9f9f9" >
+                android:background="@color/background.edittext.detail" >
 
                 <View
                     android:id="@+id/viewTop"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="#d1d1d1" />
+                    android:background="@color/background.view" />
 
                 <EditText
                     android:id="@+id/edtEditUserName"
@@ -123,19 +125,19 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="13dp"
-                    android:background="#f9f9f9"
-                    android:hint="Enter User Name"
-                    android:textColor="#000000"
-                    android:textColorHint="#626262"
+                    android:background="@color/background.edittext.detail"
+                    android:hint="@string/edittext.hint.enter_user_name"
+                    android:textColor="@color/edittext.detail_edit"
+                    android:textColorHint="@color/edittext.text_hint"
                     android:textCursorDrawable="@null"
-                    android:textSize="18dp" >
+                    android:textSize="20sp" >
                 </EditText>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_below="@+id/edtEditUserName"
-                    android:background="#d1d1d1" />
+                    android:background="@color/background.view" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -144,13 +146,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rlUserName"
                 android:layout_marginTop="40dp"
-                android:background="#f9f9f9" >
+                android:background="@color/background.edittext.detail" >
 
                 <View
                     android:id="@+id/viewTopDescrip"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="#d1d1d1" />
+                    android:background="@color/background.view" />
 
                 <EditText
                     android:id="@+id/edtEditDescription"
@@ -161,17 +163,18 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="13dp"
-                    android:background="@drawable/background_editext"
-                    android:hint="Enter Decription"
-                    android:textColor="#000000"
-                    android:textColorHint="#626262"
+                    android:background="@color/background.edittext.detail"
+                    android:hint="@string/edittext.hint.enter_description"
+                    android:textColor="@color/edittext.detail_edit"
+                    android:textSize="20sp"
+                    android:textColorHint="@color/edittext.text_hint"
                     android:textCursorDrawable="@null" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_below="@+id/edtEditDescription"
-                    android:background="#d1d1d1" />
+                    android:background="@color/background.view" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>

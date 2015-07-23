@@ -4,5 +4,10 @@
     <string name="app_name">ContactsList</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="textview_cancel">Cancel</string>
+    <string name="textview_ok">OK</string>
+    <string name="textview_save">Save</string>
+    <string name="edittext.hint.enter_user_name">Enter User Name</string>
+    <string name="edittext.hint.enter_description">Enter Description</string>
 
 </resources>

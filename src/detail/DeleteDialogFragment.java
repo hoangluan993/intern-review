@@ -13,10 +13,10 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.contactslist.ContactsFragment;
@@ -28,8 +28,7 @@ import database.MyDatabase;
 public class DeleteDialogFragment extends DialogFragment implements
 		OnClickListener {
 	// Declare Variables
-	private RelativeLayout mdelCancel, mdelOk;
-	private TextView mdelUserName;
+	private TextView mdelUserName, mdelCancel, mdelOk;
 	private AlertDialog.Builder mBuilder;
 	private ArrayList<Contacts> mContacts;
 	private int mPosition;
@@ -66,11 +65,13 @@ public class DeleteDialogFragment extends DialogFragment implements
 	 */
 
 	private void init() {
-		mdelCancel = (RelativeLayout) mView.findViewById(R.id.rlDeleteCancel);
-		mdelOk = (RelativeLayout) mView.findViewById(R.id.rlDeleteOk);
+		mdelCancel = (TextView) mView.findViewById(R.id.tvDeleteCancel);
+		mdelOk = (TextView) mView.findViewById(R.id.tvDeleteOk);
 
-		mdelUserName = (TextView) mView.findViewById(R.id.tvDeleteUsername);
-		mdelUserName.setText(mContacts.get(mPosition).getUserName());
+		mdelUserName = (TextView) mView.findViewById(R.id.tvDeleteMsg);
+		String message = "Are you sure you want to delete <b>"
+				+ mContacts.get(mPosition).getUserName() + " ?</b>";
+		mdelUserName.setText(Html.fromHtml(message));
 
 		mdelCancel.setOnClickListener(this);
 		mdelOk.setOnClickListener(this);
@@ -83,15 +84,16 @@ public class DeleteDialogFragment extends DialogFragment implements
 	public void onClick(View v) {
 		// TODO Event when click Button
 		switch (v.getId()) {
-		case R.id.rlDeleteCancel:
+		case R.id.tvDeleteCancel:
 			// TODO Set event click button Cancel in dialog DELETE
 			DeleteDialogFragment.this.dismiss();
 			break;
 
-		case R.id.rlDeleteOk:
+		case R.id.tvDeleteOk:
 			// TODO Set event click button OK in dialog DELETE
 			mData.deleteContacts(mContacts.get(mPosition)
 					.getId());
+			
 			DeleteDialogFragment.this.dismiss();
 			showContactFragment();
 			break;

@@ -7,23 +7,15 @@
         android:id="@+id/rlActionbar"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:background="#00bbd2" >
+        android:background="@color/background.actionbar" >
 
-        <RelativeLayout
-            android:id="@+id/rlBack"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_pressed"
-            android:onClick="true" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_back" />
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_back_pressed"
+            android:padding="19dp"
+            android:src="@drawable/ic_back" />
 
         <ImageView
             android:layout_width="wrap_content"

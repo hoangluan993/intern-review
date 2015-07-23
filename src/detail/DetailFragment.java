@@ -57,6 +57,8 @@ public class DetailFragment extends Fragment implements OnClickListener {
 	 * click Cancel and Save
 	 */
 	private void init() {
+		// Locate the TextView, RelativeLayout, EditText in
+		// fragment_detail.xml
 		mdetailAvatar = (RelativeLayout) mView
 				.findViewById(R.id.rlDetailAvatar);
 		mdetailCancel = (TextView) mView.findViewById(R.id.tvDetailCancel);
@@ -65,7 +67,7 @@ public class DetailFragment extends Fragment implements OnClickListener {
 		meditUsername = (EditText) mView.findViewById(R.id.edtEditUserName);
 		meditDescription = (TextView) mView
 				.findViewById(R.id.edtEditDescription);
-
+		// Set the results into TextView, RelativeLayout, EditText
 		mdetailUsername.setText(mContacts.get(mPosition).getUserName());
 		meditUsername.setText(mContacts.get(mPosition).getUserName());
 		meditDescription.setText(mContacts.get(mPosition).getDecription());
@@ -83,7 +85,7 @@ public class DetailFragment extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.tvDetailCancel:
 			// TODO Set event click Cancel to don't save data edit to Database
-			showContactFragment(new ContactsFragment(mContext,mData));
+			mContext.showContact();
 			break;
 
 		case R.id.tvDetailSave:
@@ -91,7 +93,7 @@ public class DetailFragment extends Fragment implements OnClickListener {
 			mData.updateContacts(mContacts.get(mPosition).getId(),mContacts.get(mPosition).getAvatar(),
 					meditUsername.getText().toString(), meditDescription
 							.getText().toString());
-			showContactFragment(new ContactsFragment(mContext,mData));
+			mContext.showContact();
 			break;
 
 		default:

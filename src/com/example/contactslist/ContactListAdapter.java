@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import model.Contacts;
 import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import database.MyDatabase;
-import detail.DeleteDialogFragment;
-import detail.DetailFragment;
 
 @SuppressLint("InflateParams")
 public class ContactListAdapter extends BaseAdapter {
@@ -28,7 +25,7 @@ public class ContactListAdapter extends BaseAdapter {
 	private ArrayList<Contacts> mContacts;
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
-	private MyDatabase mData;
+	private ContactsFragment mContactsFragment;
 
 	/**
 	 * @param context
@@ -40,11 +37,11 @@ public class ContactListAdapter extends BaseAdapter {
 	 * @param mUserNames
 	 *            ArrayList<String> set UserName for Contacts
 	 */
-	public ContactListAdapter(MainActivity context, MyDatabase data) {
+	public ContactListAdapter(MainActivity context, MyDatabase data, ContactsFragment contactsFragment) {
 		this.mContext = context;
+		this.mContactsFragment = contactsFragment;
 		this.mContacts = new ArrayList<Contacts>();
 		this.mContacts.addAll(data.getContacts());
-		this.mData = data;
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -70,42 +67,45 @@ public class ContactListAdapter extends BaseAdapter {
 	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder;
+		ViewHolder holder;
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.item_list_contacts, null);
-			viewHolder = new ViewHolder();
+			holder = new ViewHolder();
 			// Locate the TextView, RelativeLayout, ImageView in
 			// item_list_contacts.xml
-			viewHolder.rlavatar = (RelativeLayout) convertView
+			holder.rlavatar = (RelativeLayout) convertView
 					.findViewById(R.id.rlAvatar);
-			viewHolder.userName = (TextView) convertView
+			holder.userName = (TextView) convertView
 					.findViewById(R.id.tvUserName);
-			viewHolder.btnEdit = (ImageView) convertView
+			holder.btnEdit = (ImageView) convertView
 					.findViewById(R.id.imgEdit);
-			viewHolder.btnDelete = (ImageView) convertView
+			holder.btnDelete = (ImageView) convertView
 					.findViewById(R.id.imgDelete);
-			convertView.setTag(viewHolder);
+			holder.btnEdit.setTag("edit");
+			holder.btnDelete.setTag("delete");
+			convertView.setTag(holder);
 		} else {
-			viewHolder = (ViewHolder) convertView.getTag();
+			holder = (ViewHolder) convertView.getTag();
 		}
 		// Set the results into TextView, ImageView
-		viewHolder.rlavatar.setBackgroundResource(mContacts.get(position)
+		holder.rlavatar.setBackgroundResource(mContacts.get(position)
 				.getAvatar());
-		viewHolder.userName.setText(mContacts.get(position).getUserName());
-		viewHolder.btnEdit.setOnClickListener(new OnClickListener() {
+		holder.userName.setText(mContacts.get(position).getUserName());
+		holder.btnEdit.setOnClickListener(new OnClickListener() {
 			// TODO Set event click button Edit
 			@Override
 			public void onClick(View v) {
 				mContext.isfragmentDetail = true;
-				showDetail(position);
+				mContactsFragment.setPositionContact(position);
+				mContactsFragment.onClick(v);
 			}
 		});
-		viewHolder.btnDelete.setOnClickListener(new OnClickListener() {
+		holder.btnDelete.setOnClickListener(new OnClickListener() {
 			// TODO Set event click button Delete
 			@Override
 			public void onClick(View v) {
-				new DeleteDialogFragment(mContext, position, mData).show(
-						mContext.getFragmentManager(), "dialog");
+				mContactsFragment.setPositionContact(position);
+				mContactsFragment.onClick(v);
 			}
 		});
 
@@ -116,17 +116,6 @@ public class ContactListAdapter extends BaseAdapter {
 		public TextView userName;
 		public ImageView btnEdit, btnDelete;
 		public RelativeLayout rlavatar;
-	}
-
-	/**
-	 * show Interface Edit Detail Fragment
-	 */
-	private void showDetail(int position) {
-		FragmentTransaction fragtst = mContext.getFragmentManager()
-				.beginTransaction();
-		fragtst.replace(R.id.frameLayout, new DetailFragment(mContext,
-				position, mData));
-		fragtst.commit();
 	}
 
 }
