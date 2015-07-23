@@ -6,7 +6,6 @@ package com.example.contactslist;
 
 import model.Contacts;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,9 +26,8 @@ public class ContactsFragment extends Fragment {
 	private int mPositionContacts;
 	private MainActivity mContext;
 	public static ContactListAdapter mAdapter;
-	private ProgressDialog mProgressDialog;
 	// Set the limit for load more
-	public int limit = 20;
+	public int limit = 15;
 
 	public ContactsFragment(MainActivity context, MyDatabase data) {
 		this.mContext = context;
@@ -112,12 +110,8 @@ public class ContactsFragment extends Fragment {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			// Create and show Dialog Loading more
-			mProgressDialog = new ProgressDialog(mContext);
-			mProgressDialog.setTitle("Please wait");
-			mProgressDialog.setMessage("Loading data more...");
-			mProgressDialog.setIndeterminate(false);
-			mProgressDialog.show();
+			// Show icon Loading more
+			mContext.showLoading();
 		}
 
 		@Override
@@ -130,7 +124,6 @@ public class ContactsFragment extends Fragment {
 			for (int i = limit; i < (limit + 10); i++) {
 				mData.addContact(new Contacts("" + i, avatars[i % 4], userName
 						+ " " + i, decription + " " + i));
-				Log.d("insert", "thanh cong");
 			}
 			limit = limit + 10;
 			return null;
@@ -144,7 +137,8 @@ public class ContactsFragment extends Fragment {
 					ContactsFragment.this);
 			mlistContact.setAdapter(mAdapter);
 			mlistContact.setSelectionFromTop(position, 0);
-			mProgressDialog.dismiss();
+			mContext.hideLoading();
+//			mProgressDialog.dismiss();
 		}
 
 	}

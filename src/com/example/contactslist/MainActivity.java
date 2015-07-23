@@ -6,10 +6,12 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import database.MyDatabase;
 import detail.DeleteDialogFragment;
@@ -19,11 +21,14 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	// Declare Variables
 	public boolean isfragmentDetail = false;
-	private ImageView mbuttonBack;
+	private ImageView mbuttonBack, mLoading;
 	private Fragment mcontactsFragment;
 	private final int TIME_INTERVAL = 2000;
 	private long mBackPressed;
+	private int mRotation = 0;
+	private LinearLayout misLoadding;
 	public MyDatabase myData;
+	Handler seekHandler = new Handler();
 
 	/**
 	 * Show ContactsFragment
@@ -32,7 +37,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//Set data for Database
+		init();
+	}
+
+	private void init() {
+		misLoadding = (LinearLayout) findViewById(R.id.llLoading);
+		// run Thread set rotate icon loading more
+		new Thread(run).start();
+		// Set data for Database
 		setDatabase();
 		mcontactsFragment = new ContactsFragment(this, myData);
 		showContact();
@@ -60,6 +72,39 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}
+
+	/**
+	 * Show icon Loading more
+	 */
+	public void showLoading() {
+		misLoadding.setVisibility(LinearLayout.VISIBLE);
+	}
+
+	/**
+	 * Hide icon Loading more
+	 */
+	public void hideLoading() {
+		misLoadding.setVisibility(LinearLayout.INVISIBLE);
+	}
+
+	/**
+	 * Thread run set rotation for icon
+	 */
+	Runnable run = new Runnable() {
+		@Override
+		public void run() {
+			seekHandler.postDelayed(run, 10);
+			mLoading = (ImageView) findViewById(R.id.imgLoading);
+			mLoading.setRotation(mRotation);
+			mRotation += 4;
+			if (mRotation >= 360) {
+				mRotation = 0;
+			} else {
+				mLoading.setRotation(mRotation);
+			}
+		}
+
+	};
 
 	/**
 	 * Function set Double Click to exit
@@ -100,7 +145,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		int[] avatars = { R.drawable.img_avatar_1, R.drawable.img_avatar_2,
 				R.drawable.img_avatar_3, R.drawable.img_avatar_4 };
 		myData = new MyDatabase(this);
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 15; i++) {
 			try {
 				myData.addContact(new Contacts("" + i, avatars[i % 4], userName
 						+ " " + i, decription + " " + i));
@@ -140,4 +185,5 @@ public class MainActivity extends Activity implements OnClickListener {
 		new DeleteDialogFragment(this, position, myData).show(
 				this.getFragmentManager(), "dialog");
 	}
+
 }

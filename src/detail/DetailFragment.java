@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.contactslist.ContactsFragment;
 import com.example.contactslist.MainActivity;
 import com.example.contactslist.R;
 
