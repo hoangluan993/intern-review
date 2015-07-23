@@ -31,10 +31,11 @@ public class MyDatabase {
 
 		}
 
-		String sql = "CREATE TABLE contacts (";
+		String sql = "create table contacts (";
 		sql += "id text primary key,";
+		sql += "avatar integer,";
 		sql += "username text not null,";
-		sql += "dicription text)";
+		sql += "description text)";
 
 		try {
 			mData.execSQL(sql);
@@ -48,19 +49,26 @@ public class MyDatabase {
 	 */
 	public String addContact(Contacts contact) {
 		// TODO insert data to database
-
 		String id = contact.getId();
+		int avatar = contact.getAvatar();
 		String username = contact.getUserName();
-		String dicription = contact.getDecription();
-
-		String sql = "INSERT INTO contacts VALUES('" + id + "','" + username
-				+ "', '" + dicription + "');";
-		try {
-			mData.execSQL(sql);
-		} catch (SQLException ex) {
-			Log.d("INSERT", "Error");
+		String description = contact.getDecription();
+		
+		if (username == null){
+			return "Insert fail";
 		}
-
+		
+		if (description == null){
+			description = "";
+		}
+		
+		String sql = "insert into contacts values('" + 
+				id + "', " + 
+				avatar + ", '" + 
+				username + "', '" + 
+				description + "');";
+		mData.execSQL(sql);
+		
 		return "Success";
 	}
 
@@ -78,10 +86,11 @@ public class MyDatabase {
 		if (cursor != null) {
 			do {
 				String id = cursor.getString(0);
-				String username = cursor.getString(1);
-				String decription = cursor.getString(2);
+				int avatar = cursor.getInt(1);
+				String username = cursor.getString(2);
+				String decription = cursor.getString(3);
 
-				contacts.add(new Contacts(id, username, decription));
+				contacts.add(new Contacts(id, avatar, username, decription));
 			} while (cursor.moveToNext());
 		}
 

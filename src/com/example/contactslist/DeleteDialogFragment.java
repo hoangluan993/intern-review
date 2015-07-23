@@ -26,16 +26,14 @@ public class DeleteDialogFragment extends DialogFragment implements
 	private TextView mdelUserName;
 	private AlertDialog.Builder mBuilder;
 	private ArrayList<Contacts> mContacts;
-	private ArrayList<Integer> mAvatars;
 	private int mPosition;
 	private View mView;
 	private MyDatabase mData;
 	private MainActivity mContext;
 
-	public DeleteDialogFragment(MainActivity context,int position, ArrayList<Integer> avatars, MyDatabase data) {
+	public DeleteDialogFragment(MainActivity context,int position, MyDatabase data) {
 		mPosition = position;
 		this.mContacts = data.getContacts();
-		this.mAvatars = avatars;
 		this.mData = data;
 		this.mContext =  context;
 	}
@@ -104,7 +102,7 @@ public class DeleteDialogFragment extends DialogFragment implements
 	public void showContactFragment() {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.frameLayout, new ContactsFragment(mAvatars, mData));
+		fragtst.replace(R.id.frameLayout, new ContactsFragment(mContext,mData));
 		fragtst.commit();
 	}
 

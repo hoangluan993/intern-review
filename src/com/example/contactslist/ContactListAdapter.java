@@ -22,7 +22,6 @@ import database.MyDatabase;
 @SuppressLint("InflateParams")
 public class ContactListAdapter extends BaseAdapter {
 
-	private ArrayList<Integer> mAvatars;
 	private ArrayList<Contacts> mContacts;
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
@@ -38,10 +37,10 @@ public class ContactListAdapter extends BaseAdapter {
 	 * @param mUserNames
 	 *            ArrayList<String> set UserName for Contacts
 	 */
-	public ContactListAdapter(MainActivity context, ArrayList<Integer> avatars, MyDatabase data) {
+	public ContactListAdapter(MainActivity context, MyDatabase data) {
 		this.mContext = context;
-		mAvatars = avatars;
-		mContacts = data.getContacts();
+		this.mContacts = new ArrayList<Contacts>();
+		this.mContacts.addAll(data.getContacts());
 		this.mData = data;
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -84,8 +83,7 @@ public class ContactListAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-
-		viewHolder.rlavatar.setBackgroundResource(mAvatars.get(position));
+		viewHolder.rlavatar.setBackgroundResource(mContacts.get(position).getAvatar());
 		viewHolder.userName.setText(mContacts.get(position).getUserName());
 		viewHolder.btnEdit.setOnClickListener(new OnClickListener() {
 			// TODO Set event click button Edit
@@ -99,7 +97,7 @@ public class ContactListAdapter extends BaseAdapter {
 			// TODO Set event click button Delete
 			@Override
 			public void onClick(View v) {
-				new DeleteDialogFragment(mContext, position, mAvatars, mData).show(
+				new DeleteDialogFragment(mContext, position, mData).show(
 						mContext.getFragmentManager(), "dialog");
 			}
 		});
@@ -119,7 +117,7 @@ public class ContactListAdapter extends BaseAdapter {
 	private void showDetail(int position) {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.frameLayout, new DetailFragment(mContext,position, mAvatars, mData));
+		fragtst.replace(R.id.frameLayout, new DetailFragment(mContext,position, mData));
 		fragtst.commit();
 	}
 

@@ -2,9 +2,13 @@ package model;
 
 public class Contacts {
 	private String id,userName,decription;
+	private int avatar;
 	
-	public Contacts(String id,String userName,String decription){
+	
+
+	public Contacts(String id, int avatar,String userName,String decription){
 		this.id = id;
+		this.avatar = avatar;
 		this.userName = userName;
 		this.decription = decription;
 	}
@@ -32,7 +36,13 @@ public class Contacts {
 	public void setDecription(String decription) {
 		this.decription = decription;
 	}
+	public int getAvatar() {
+		return avatar;
+	}
 
+	public void setAvatar(int avatar) {
+		this.avatar = avatar;
+	}
 	
 	
 }

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
@@ -19,8 +20,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Fragment mcontactsFragment;
 	private final int TIME_INTERVAL = 2000;
 	private long mBackPressed;
-	private ArrayList<Integer> mAvatars;
 	public MyDatabase myData;
+	private ArrayList<Contacts> mContacts;
 
 	/**
 	 * Show ContactsFragment
@@ -30,7 +31,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setDatabase();
-		mcontactsFragment = new ContactsFragment(mAvatars, myData);
+		mContacts = myData.getContacts();
+		mcontactsFragment = new ContactsFragment(this,myData);
 		showContact();
 		mbuttonBack = (RelativeLayout) findViewById(R.id.rlBack);
 		mbuttonBack.setOnClickListener(this);
@@ -99,18 +101,37 @@ public class MainActivity extends Activity implements OnClickListener {
 	private void setDatabase() {
 		String userName = "Hoang Luan";
 		String decription = "DECRIPTION";
-		mAvatars = new ArrayList<Integer>();
-		for (int i = 0; i < 4; i++) {
-			mAvatars.add(R.drawable.img_avatar_1);
-			mAvatars.add(R.drawable.img_avatar_2);
-			mAvatars.add(R.drawable.img_avatar_3);
-			mAvatars.add(R.drawable.img_avatar_4);
-			mAvatars.add(R.drawable.img_avatar_5);
+		int[] avatars = { R.drawable.img_avatar_1, R.drawable.img_avatar_2,
+				R.drawable.img_avatar_3, R.drawable.img_avatar_4 };
+		myData =  new MyDatabase(this);
+		for (int i = 0; i < 25; i++) {
+			myData.addContact(new Contacts(""+i, avatars[i % 4], userName+" "+i, decription+" "+i));
+			Log.d("insert", "thanh cong");
 		}
-		myData = new MyDatabase(this);
-		for (int i = 0; i < 20; i++) {
-			myData.addContact(new Contacts("" + i, userName + " " + i,
-					decription + " " + i));
+	}
+	/**
+	 * Action load more contacts
+	 * @param size
+	 * @return
+	 */
+	public ArrayList<Contacts> getMore(int size){
+		// TODO get contact to show in contacts list
+		ArrayList<Contacts> contacts = new ArrayList<Contacts>();
+		
+		// If contacts list is empty then get 10 contacts
+		// Else get max is 2
+		if (size == 0){
+			for (int i = 0; i < 10; i++){
+				contacts.add(mContacts.get(i));
+			}
+		} else {
+			if (size < mContacts.size()){
+				contacts.add(mContacts.get(size));
+			}
+			if (size + 1 < mContacts.size()){
+				contacts.add(mContacts.get(size + 1));
+			}
 		}
+		return contacts;
 	}
 }
