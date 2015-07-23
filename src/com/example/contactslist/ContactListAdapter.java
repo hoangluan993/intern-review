@@ -24,6 +24,7 @@ import detail.DetailFragment;
 @SuppressLint("InflateParams")
 public class ContactListAdapter extends BaseAdapter {
 
+	// Declare Variables
 	private ArrayList<Contacts> mContacts;
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
@@ -73,6 +74,8 @@ public class ContactListAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.item_list_contacts, null);
 			viewHolder = new ViewHolder();
+			// Locate the TextView, RelativeLayout, ImageView in
+			// item_list_contacts.xml
 			viewHolder.rlavatar = (RelativeLayout) convertView
 					.findViewById(R.id.rlAvatar);
 			viewHolder.userName = (TextView) convertView
@@ -85,7 +88,9 @@ public class ContactListAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		viewHolder.rlavatar.setBackgroundResource(mContacts.get(position).getAvatar());
+		// Set the results into TextView, ImageView
+		viewHolder.rlavatar.setBackgroundResource(mContacts.get(position)
+				.getAvatar());
 		viewHolder.userName.setText(mContacts.get(position).getUserName());
 		viewHolder.btnEdit.setOnClickListener(new OnClickListener() {
 			// TODO Set event click button Edit
@@ -119,7 +124,8 @@ public class ContactListAdapter extends BaseAdapter {
 	private void showDetail(int position) {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.frameLayout, new DetailFragment(mContext,position, mData));
+		fragtst.replace(R.id.frameLayout, new DetailFragment(mContext,
+				position, mData));
 		fragtst.commit();
 	}
 

@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class MyDatabase {
+	// Declare Variables
 	private SQLiteDatabase mData;
 
 	/**
@@ -31,7 +32,7 @@ public class MyDatabase {
 
 		}
 
-		String sql = "create table contacts (";
+		String sql = "CREATE TABLE contacts (";
 		sql += "id text primary key,";
 		sql += "avatar integer,";
 		sql += "username text not null,";
@@ -45,7 +46,7 @@ public class MyDatabase {
 	}
 
 	/**
-	 * Insert Database
+	 * Insert Datab to Database
 	 */
 	public String addContact(Contacts contact) {
 		// TODO insert data to database
@@ -53,22 +54,19 @@ public class MyDatabase {
 		int avatar = contact.getAvatar();
 		String username = contact.getUserName();
 		String description = contact.getDecription();
-		
-		if (username == null){
+
+		if (username == null) {
 			return "Insert fail";
 		}
-		
-		if (description == null){
+
+		if (description == null) {
 			description = "";
 		}
-		
-		String sql = "insert into contacts values('" + 
-				id + "', " + 
-				avatar + ", '" + 
-				username + "', '" + 
-				description + "');";
+
+		String sql = "INSERT INTO contacts VALUES('" + id + "', " + avatar
+				+ ", '" + username + "', '" + description + "');";
 		mData.execSQL(sql);
-		
+
 		return "Success";
 	}
 
@@ -114,10 +112,12 @@ public class MyDatabase {
 	/**
 	 * Update data for Database
 	 */
-	public void updateContacts(String id, int avatar, String userName, String description) {
+	public void updateContacts(String id, int avatar, String userName,
+			String description) {
 		// TODO update contacts
-		String sql = "UPDATE contacts SET username='" + userName
-				+ "',avatar="+avatar+",description='" + description + "' WHERE id='" + id + "'";
+		String sql = "UPDATE contacts SET username='" + userName + "',avatar="
+				+ avatar + ",description='" + description + "' WHERE id='" + id
+				+ "'";
 		Log.d("UPDATE", sql);
 		try {
 			mData.execSQL(sql);

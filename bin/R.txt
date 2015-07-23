@@ -417,12 +417,9 @@ int drawable img_avatar_1 0x7f020043
 int drawable img_avatar_2 0x7f020044
 int drawable img_avatar_3 0x7f020045
 int drawable img_avatar_4 0x7f020046
-int drawable img_avatar_5 0x7f020047
-int drawable img_avatar_6 0x7f020048
-int drawable img_avatar_7 0x7f020049
-int drawable img_delete 0x7f02004a
-int drawable img_edit 0x7f02004b
-int drawable img_text_contacts 0x7f02004c
+int drawable img_delete 0x7f020047
+int drawable img_edit 0x7f020048
+int drawable img_text_contacts 0x7f020049
 int id action_bar 0x7f050040
 int id action_bar_activity_content 0x7f05001d
 int id action_bar_container 0x7f05003f

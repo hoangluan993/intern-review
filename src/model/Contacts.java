@@ -1,12 +1,11 @@
 package model;
 
 public class Contacts {
-	private String id,userName,decription;
+	// Declare Variables
+	private String id, userName, decription;
 	private int avatar;
-	
-	
 
-	public Contacts(String id, int avatar,String userName,String decription){
+	public Contacts(String id, int avatar, String userName, String decription) {
 		this.id = id;
 		this.avatar = avatar;
 		this.userName = userName;
@@ -36,6 +35,7 @@ public class Contacts {
 	public void setDecription(String decription) {
 		this.decription = decription;
 	}
+
 	public int getAvatar() {
 		return avatar;
 	}
@@ -43,6 +43,5 @@ public class Contacts {
 	public void setAvatar(int avatar) {
 		this.avatar = avatar;
 	}
-	
-	
+
 }

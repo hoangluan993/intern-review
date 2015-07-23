@@ -6,6 +6,7 @@ import model.Contacts;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import database.MyDatabase;
 
 public class MainActivity extends Activity implements OnClickListener {
+
+	// Declare Variables
 	public boolean isfragmentDetail = false;
 	private RelativeLayout mbuttonBack;
 	private Fragment mcontactsFragment;
@@ -32,7 +35,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 		setDatabase();
 		mContacts = myData.getContacts();
-		mcontactsFragment = new ContactsFragment(this,myData);
+		mcontactsFragment = new ContactsFragment(this, myData);
 		showContact();
 		mbuttonBack = (RelativeLayout) findViewById(R.id.rlBack);
 		mbuttonBack.setOnClickListener(this);
@@ -103,35 +106,14 @@ public class MainActivity extends Activity implements OnClickListener {
 		String decription = "DECRIPTION";
 		int[] avatars = { R.drawable.img_avatar_1, R.drawable.img_avatar_2,
 				R.drawable.img_avatar_3, R.drawable.img_avatar_4 };
-		myData =  new MyDatabase(this);
-		for (int i = 0; i < 10; i++) {
-			myData.addContact(new Contacts(""+i, avatars[i % 4], userName+" "+i, decription+" "+i));
-			Log.d("insert", "thanh cong");
-		}
-	}
-	/**
-	 * Action load more contacts
-	 * @param size
-	 * @return
-	 */
-	public ArrayList<Contacts> getMore(int size){
-		// TODO get contact to show in contacts list
-		ArrayList<Contacts> contacts = new ArrayList<Contacts>();
-		
-		// If contacts list is empty then get 10 contacts
-		// Else get max is 2
-		if (size == 0){
-			for (int i = 0; i < 10; i++){
-				contacts.add(mContacts.get(i));
-			}
-		} else {
-			if (size < mContacts.size()){
-				contacts.add(mContacts.get(size));
-			}
-			if (size + 1 < mContacts.size()){
-				contacts.add(mContacts.get(size + 1));
+		myData = new MyDatabase(this);
+		for (int i = 0; i < 20; i++) {
+			try {
+				myData.addContact(new Contacts("" + i, avatars[i % 4], userName
+						+ " " + i, decription + " " + i));
+			} catch (SQLException e) {
+				Log.d("INSERT", "ERROR");
 			}
 		}
-		return contacts;
 	}
 }

@@ -26,6 +26,7 @@ import com.example.contactslist.R;
 import database.MyDatabase;
 
 public class DetailFragment extends Fragment implements OnClickListener {
+	// Declare Variables
 	private TextView mdetailCancel, mdetailSave, mdetailUsername,
 			meditDescription;
 	private EditText meditUsername;

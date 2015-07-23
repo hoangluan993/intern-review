@@ -27,6 +27,7 @@ import database.MyDatabase;
 
 public class DeleteDialogFragment extends DialogFragment implements
 		OnClickListener {
+	// Declare Variables
 	private RelativeLayout mdelCancel, mdelOk;
 	private TextView mdelUserName;
 	private AlertDialog.Builder mBuilder;
