@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import database.MyDatabase;
+import detail.DeleteDialogFragment;
+import detail.DetailFragment;
 
 @SuppressLint("InflateParams")
 public class ContactListAdapter extends BaseAdapter {

@@ -3,7 +3,7 @@
  * To confirm you want to delete 
  */
 
-package com.example.contactslist;
+package detail;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.contactslist.ContactsFragment;
+import com.example.contactslist.MainActivity;
+import com.example.contactslist.R;
+
 import database.MyDatabase;
 
 public class DeleteDialogFragment extends DialogFragment implements
@@ -85,7 +90,7 @@ public class DeleteDialogFragment extends DialogFragment implements
 		case R.id.rlDeleteOk:
 			// TODO Set event click button OK in dialog DELETE
 			mData.deleteContacts(mContacts.get(mPosition)
-					.getUserName());
+					.getId());
 			DeleteDialogFragment.this.dismiss();
 			showContactFragment();
 			break;

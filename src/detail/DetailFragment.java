@@ -3,7 +3,7 @@
  * You can edit the information and store information
  */
 
-package com.example.contactslist;
+package detail;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.contactslist.ContactsFragment;
+import com.example.contactslist.MainActivity;
+import com.example.contactslist.R;
+
 import database.MyDatabase;
 
 public class DetailFragment extends Fragment implements OnClickListener {
@@ -82,7 +87,7 @@ public class DetailFragment extends Fragment implements OnClickListener {
 
 		case R.id.tvDetailSave:
 			// TODO Set event click Save to save data edit to Database
-			mData.updateContacts(mContacts.get(mPosition).getId(),
+			mData.updateContacts(mContacts.get(mPosition).getId(),mContacts.get(mPosition).getAvatar(),
 					meditUsername.getText().toString(), meditDescription
 							.getText().toString());
 			showContactFragment(new ContactsFragment(mContext,mData));

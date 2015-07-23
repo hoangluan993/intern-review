@@ -104,7 +104,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		int[] avatars = { R.drawable.img_avatar_1, R.drawable.img_avatar_2,
 				R.drawable.img_avatar_3, R.drawable.img_avatar_4 };
 		myData =  new MyDatabase(this);
-		for (int i = 0; i < 25; i++) {
+		for (int i = 0; i < 10; i++) {
 			myData.addContact(new Contacts(""+i, avatars[i % 4], userName+" "+i, decription+" "+i));
 			Log.d("insert", "thanh cong");
 		}

@@ -30,13 +30,12 @@ public class ContactsFragment extends Fragment {
 	private ContactListAdapter mAdapter;
 	private boolean isLoading = false;
 	ProgressDialog mProgressDialog;
-	private int limit = 20;
+	public int limit = 10;
 
 	public ContactsFragment(MainActivity context, MyDatabase data) {
 		this.mContext = context;
 		this.mData = data;
-		this.mContacts = new ArrayList<Contacts>();
-		mContacts.addAll(context.getMore(mContacts.size()));
+		this.mContacts = data.getContacts();
 	}
 
 	@Override
@@ -55,25 +54,6 @@ public class ContactsFragment extends Fragment {
 		mlistContact = (ListView) mView.findViewById(R.id.lvContact);
 		mAdapter = new ContactListAdapter((MainActivity) getActivity(), mData);
 		mlistContact.setAdapter(mAdapter);
-		mlistContact.setOnScrollListener(new OnScrollListener() {
-
-			@Override
-			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onScroll(AbsListView view, int firstVisibleItem,
-					int visibleItemCount, int totalItemCount) {
-				// TODO Auto-generated method stub
-				if (firstVisibleItem + visibleItemCount == totalItemCount) {
-					if (!isLoading) {
-//						new LoadMoreContacts().execute();
-					}
-				}
-			}
-		});
 	}
 	private class LoadMoreTask extends AsyncTask<Void, Void, Void>
 	{
@@ -82,14 +62,6 @@ public class ContactsFragment extends Fragment {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			mProgressDialog = new ProgressDialog(mContext);
-			// Set progressdialog title
-			mProgressDialog.setTitle("Parse.com Load More Tutorial");
-			// Set progressdialog message
-			mProgressDialog.setMessage("Loading...");
-			mProgressDialog.setIndeterminate(false);
-			// Show progressdialog
-			mProgressDialog.show();
 		}
 
 		@Override
@@ -109,7 +81,6 @@ public class ContactsFragment extends Fragment {
 					if (scrollState == SCROLL_STATE_IDLE) {
 						if (mlistContact.getLastVisiblePosition() >= count
 								- threshold) {
-							// Execute LoadMoreDataTask AsyncTask
 							new LoadMoreDataTask().execute();
 						}
 					}
@@ -119,7 +90,11 @@ public class ContactsFragment extends Fragment {
 				public void onScroll(AbsListView view, int firstVisibleItem,
 						int visibleItemCount, int totalItemCount) {
 					// TODO Auto-generated method stub
-					
+					if (firstVisibleItem + visibleItemCount == totalItemCount) {
+						
+//							new LoadMoreDataTask().execute();
+			
+					}
 				}
 			});
 		}
@@ -138,12 +113,9 @@ public class ContactsFragment extends Fragment {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			mProgressDialog = new ProgressDialog(mContext);
-			// Set progressdialog title
 			mProgressDialog.setTitle("Parse.com Load More Tutorial");
-			// Set progressdialog message
 			mProgressDialog.setMessage("Loading more...");
 			mProgressDialog.setIndeterminate(false);
-			// Show progressdialog
 			mProgressDialog.show();
 		}
 
@@ -151,28 +123,25 @@ public class ContactsFragment extends Fragment {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			int position = mlistContact.getLastVisiblePosition();
-			// Pass the results into ListViewAdapter.java
 			mAdapter = new ContactListAdapter(mContext, mData);
-			// Binds the Adapter to the ListView
 			mlistContact.setAdapter(mAdapter);
-			// Show the latest retrived results on the top
 			mlistContact.setSelectionFromTop(position, 0);
-			// Close the progressdialog
 			mProgressDialog.dismiss();
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
+			Log.d("limit",""+limit);
 			String userName = "Hoang Luan";
 			String decription = "DECRIPTION";
 			int[] avatars = { R.drawable.img_avatar_1, R.drawable.img_avatar_2,
 					R.drawable.img_avatar_3, R.drawable.img_avatar_4 };
-			mData =  new MyDatabase(mContext);
-			for (int i = 0; i < 25+limit; i++) {
+			for (int i = limit; i < (limit+10); i++) {
 				mData.addContact(new Contacts(""+i, avatars[i % 4], userName+" "+i, decription+" "+i));
 				Log.d("insert", "thanh cong");
 			}
+			limit = limit+10;
 			return null;
 		}
 		

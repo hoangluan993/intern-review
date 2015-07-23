@@ -100,9 +100,9 @@ public class MyDatabase {
 	/**
 	 * Delete Data from Database
 	 */
-	public void deleteContacts(String contacts) {
+	public void deleteContacts(String id) {
 		// TODO delete contacts
-		String sql = "DELETE FROM contacts WHERE username='" + contacts + "'";
+		String sql = "DELETE FROM contacts WHERE id='" + id + "'";
 		try {
 			mData.execSQL(sql);
 		} catch (SQLException ex) {
@@ -114,10 +114,11 @@ public class MyDatabase {
 	/**
 	 * Update data for Database
 	 */
-	public void updateContacts(String id, String userName, String description) {
+	public void updateContacts(String id, int avatar, String userName, String description) {
 		// TODO update contacts
 		String sql = "UPDATE contacts SET username='" + userName
-				+ "',dicription='" + description + "' WHERE id='" + id + "'";
+				+ "',avatar="+avatar+",description='" + description + "' WHERE id='" + id + "'";
+		Log.d("UPDATE", sql);
 		try {
 			mData.execSQL(sql);
 		} catch (SQLException ex) {
