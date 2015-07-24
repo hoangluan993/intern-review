@@ -161,7 +161,7 @@
                     android:layout_below="@id/viewTopDescrip"
                     android:layout_marginBottom="13dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="14dp"
                     android:layout_marginTop="13dp"
                     android:background="@color/background.edittext.detail"
                     android:hint="@string/edittext.hint.enter_description"

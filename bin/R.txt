@@ -257,8 +257,8 @@ int color dim_foreground_disabled_material_dark 0x7f07001e
 int color dim_foreground_disabled_material_light 0x7f07001f
 int color dim_foreground_material_dark 0x7f07001c
 int color dim_foreground_material_light 0x7f07001d
-int color edittext_detail_edit 0x7f070045
-int color edittext_text_hint 0x7f070046
+int color edittext_detail_edit 0x7f070044
+int color edittext_text_hint 0x7f070045
 int color highlighted_text_material_dark 0x7f070022
 int color highlighted_text_material_light 0x7f070023
 int color hint_foreground_material_dark 0x7f070020
@@ -292,7 +292,7 @@ int color switch_thumb_normal_material_dark 0x7f070012
 int color switch_thumb_normal_material_light 0x7f070013
 int color textview_detail_username 0x7f070043
 int color textview_item_list_contacts 0x7f070041
-int color textview_loading 0x7f070044
+int color textview_loading 0x7f070046
 int color textview_message_dialog 0x7f070042
 int color textview_ok_cancel 0x7f070040
 int color textview_save_cacel 0x7f07003f

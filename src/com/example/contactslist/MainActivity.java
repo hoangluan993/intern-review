@@ -20,36 +20,41 @@ import detail.DetailFragment;
 public class MainActivity extends Activity implements OnClickListener {
 
 	// Declare Variables
-	public boolean isfragmentDetail = false;
-	private ImageView mbuttonBack, mLoading;
-	private Fragment mcontactsFragment;
+	private boolean mIsFragmentDetail = false;
+	private ImageView mButtonBack, mLoading;
+	private Fragment mContactsFragment;
 	private final int TIME_INTERVAL = 2000;
 	private long mBackPressed;
 	private int mRotation = 0;
-	private LinearLayout misLoadding;
-	public MyDatabase myData;
-	Handler seekHandler = new Handler();
+	private LinearLayout mIsLoadding;
+	private MyDatabase mDatabase;
+	private Handler mHandler;
 
-	/**
-	 * Show ContactsFragment
-	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		init();
 	}
+	/**
+	 * Locate the element in activity_main.xml
+	 * Set Data for Database
+	 * Init ContactsFragment. Show Interface List contacts
+	 * Set event click button back to change fragment and exit application
+	 */
 
 	private void init() {
-		misLoadding = (LinearLayout) findViewById(R.id.llLoading);
+		// Locate the ImageView in activity_main.xml
+		mIsLoadding = (LinearLayout) findViewById(R.id.llLoading);
+		mButtonBack = (ImageView) findViewById(R.id.imgBack);
+		mHandler = new Handler();
 		// run Thread set rotate icon loading more
 		new Thread(run).start();
 		// Set data for Database
 		setDatabase();
-		mcontactsFragment = new ContactsFragment(this, myData);
+		mContactsFragment = new ContactsFragment(this, mDatabase);
 		showContact();
-		mbuttonBack = (ImageView) findViewById(R.id.imgBack);
-		mbuttonBack.setOnClickListener(this);
+		mButtonBack.setOnClickListener(this);
 	}
 
 	/**
@@ -60,10 +65,13 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.imgBack:
-			if (isfragmentDetail) {
+			//is at Detail
+			if (mIsFragmentDetail) {
+				//show list Contacts 
 				showContact();
-				isfragmentDetail = false;
+				mIsFragmentDetail = false;
 			} else {
+				//is at List Contacts
 				setDoubleClick();
 			}
 			break;
@@ -74,17 +82,17 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * Show icon Loading more
+	 * Show icon Loading more rotate
 	 */
 	public void showLoading() {
-		misLoadding.setVisibility(LinearLayout.VISIBLE);
+		mIsLoadding.setVisibility(LinearLayout.VISIBLE);
 	}
 
 	/**
-	 * Hide icon Loading more
+	 * Hide icon Loading more rotate
 	 */
 	public void hideLoading() {
-		misLoadding.setVisibility(LinearLayout.INVISIBLE);
+		mIsLoadding.setVisibility(LinearLayout.INVISIBLE);
 	}
 
 	/**
@@ -93,8 +101,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	Runnable run = new Runnable() {
 		@Override
 		public void run() {
-			seekHandler.postDelayed(run, 10);
+			mHandler.postDelayed(run, 10);
+			// Locate the ImageView in activity_main.xml
 			mLoading = (ImageView) findViewById(R.id.imgLoading);
+			//Set Image rotate
 			mLoading.setRotation(mRotation);
 			mRotation += 4;
 			if (mRotation >= 360) {
@@ -107,13 +117,12 @@ public class MainActivity extends Activity implements OnClickListener {
 	};
 
 	/**
-	 * Function set Double Click to exit
+	 * Function set Double Click to exit for exit application
 	 */
 	@Override
 	public void onBackPressed() {
-		if (isfragmentDetail) {
-			showContact();
-			isfragmentDetail = false;
+		if (mIsFragmentDetail) {
+		    showContact();
 		} else {
 			setDoubleClick();
 		}
@@ -142,12 +151,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	private void setDatabase() {
 		String userName = "Hoang Luan";
 		String decription = "DECRIPTION";
+		//Create Array avatar
 		int[] avatars = { R.drawable.img_avatar_1, R.drawable.img_avatar_2,
 				R.drawable.img_avatar_3, R.drawable.img_avatar_4 };
-		myData = new MyDatabase(this);
-		for (int i = 0; i < 15; i++) {
+		mDatabase = new MyDatabase(this);
+		for (int i = 0; i < 100; i++) {
 			try {
-				myData.addContact(new Contacts("" + i, avatars[i % 4], userName
+				//Add data to Database
+				mDatabase.addContact(new Contacts("" + i, avatars[i % 4], userName
 						+ " " + i, decription + " " + i));
 			} catch (SQLException e) {
 				Log.d("INSERT", "ERROR");
@@ -159,30 +170,32 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * Show List Contacts
 	 */
 	public void showContact() {
+		mIsFragmentDetail = false;
 		FragmentTransaction fragtst = getFragmentManager().beginTransaction();
-		fragtst.replace(R.id.frameLayout, mcontactsFragment);
+		fragtst.replace(R.id.frameLayout, mContactsFragment);
 		fragtst.commit();
 	}
 
 	/**
-	 * Show detail to Edit username or description
+	 * Show detail contacts to Edit username or description
 	 * 
-	 * @param position
+	 * @param position positon in list
 	 */
 	public void showDetail(int position) {
+		mIsFragmentDetail = true;
 		FragmentTransaction fragtst = getFragmentManager().beginTransaction();
 		fragtst.replace(R.id.frameLayout, new DetailFragment(this, position,
-				myData));
+				mDatabase));
 		fragtst.commit();
 	}
 
 	/**
 	 * Show dialog confirm delete
 	 * 
-	 * @param position
+	 * @param position positon in list
 	 */
 	public void showDelete(int position) {
-		new DeleteDialogFragment(this, position, myData).show(
+		new DeleteDialogFragment(this, position, mDatabase).show(
 				this.getFragmentManager(), "dialog");
 	}
 

@@ -16,8 +16,8 @@
     <color name="textview.ok_cancel">#007aff</color>
     <color name="textview.item_list_contacts">#505050</color>
     <color name="textview.message_dialog">#b0b0b5</color>
-    <color name="textview.detail_username">#505050</color>
-    <color name="textview.loading">#00a2e0</color>
+    <color name="textview.detail_username">#505050</color>    
     <color name="edittext.detail_edit">#626262</color>
     <color name="edittext.text_hint">#626262</color>
+    <color name="textview.loading">#00a2e0</color>
 </resources>

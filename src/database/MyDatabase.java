@@ -29,7 +29,7 @@ public class MyDatabase {
 		try {
 			mData.execSQL(drop);
 		} catch (SQLException ex) {
-
+			Log.d("DROP", "Error");
 		}
 
 		String sql = "CREATE TABLE contacts (";
@@ -46,7 +46,7 @@ public class MyDatabase {
 	}
 
 	/**
-	 * Insert Datab to Database
+	 * Insert Data to Database
 	 */
 	public String addContact(Contacts contact) {
 		// TODO insert data to database
@@ -62,7 +62,7 @@ public class MyDatabase {
 		if (description == null) {
 			description = "";
 		}
-
+		//sql insert data into table contacts
 		String sql = "INSERT INTO contacts VALUES('" + id + "', " + avatar
 				+ ", '" + username + "', '" + description + "');";
 		mData.execSQL(sql);
@@ -76,7 +76,7 @@ public class MyDatabase {
 	public ArrayList<Contacts> getContacts() {
 		// TODO get data for ArrayList
 		ArrayList<Contacts> contacts = new ArrayList<Contacts>();
-
+		//sql get data from Database
 		String sql = "SELECT * FROM contacts";
 		Cursor cursor = mData.rawQuery(sql, null);
 

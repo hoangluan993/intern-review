@@ -28,7 +28,7 @@ import database.MyDatabase;
 public class DeleteDialogFragment extends DialogFragment implements
 		OnClickListener {
 	// Declare Variables
-	private TextView mdelUserName, mdelCancel, mdelOk;
+	private TextView mDelUserName, mDelCancel, mDelOk;
 	private AlertDialog.Builder mBuilder;
 	private ArrayList<Contacts> mContacts;
 	private int mPosition;
@@ -36,15 +36,16 @@ public class DeleteDialogFragment extends DialogFragment implements
 	private MyDatabase mData;
 	private MainActivity mContext;
 
-	public DeleteDialogFragment(MainActivity context,int position, MyDatabase data) {
+	public DeleteDialogFragment(MainActivity context, int position,
+			MyDatabase data) {
 		mPosition = position;
 		this.mContacts = data.getContacts();
 		this.mData = data;
-		this.mContext =  context;
+		this.mContext = context;
 	}
 
 	/**
-	 * Init Dialog Delete from Layout custom
+	 * Init Dialog Delete from dialog_delete custom
 	 */
 
 	@Override
@@ -59,22 +60,23 @@ public class DeleteDialogFragment extends DialogFragment implements
 	}
 
 	/**
-	 * Set values for Username get data from Database Create event Click button
+	 * Set values for message get data from Database Create event Click button
 	 * Cancel to Don't Confirm delete Create event Click button Ok to Confirm
 	 * delete
 	 */
 
 	private void init() {
-		mdelCancel = (TextView) mView.findViewById(R.id.tvDeleteCancel);
-		mdelOk = (TextView) mView.findViewById(R.id.tvDeleteOk);
-
-		mdelUserName = (TextView) mView.findViewById(R.id.tvDeleteMsg);
+		// Locate the TextView in dialog_delete.xml
+		mDelCancel = (TextView) mView.findViewById(R.id.tvDeleteCancel);
+		mDelOk = (TextView) mView.findViewById(R.id.tvDeleteOk);
+		mDelUserName = (TextView) mView.findViewById(R.id.tvDeleteMsg);
 		String message = "Are you sure you want to delete <b>"
 				+ mContacts.get(mPosition).getUserName() + " ?</b>";
-		mdelUserName.setText(Html.fromHtml(message));
-
-		mdelCancel.setOnClickListener(this);
-		mdelOk.setOnClickListener(this);
+		// Set string show for Dialog confirm delete
+		mDelUserName.setText(Html.fromHtml(message));
+		// Set event click button Cancel, Ok to confirm delete
+		mDelCancel.setOnClickListener(this);
+		mDelOk.setOnClickListener(this);
 	}
 
 	/**
@@ -82,7 +84,7 @@ public class DeleteDialogFragment extends DialogFragment implements
 	 */
 	@Override
 	public void onClick(View v) {
-		// TODO Event when click Button
+		// Event when click Button
 		switch (v.getId()) {
 		case R.id.tvDeleteCancel:
 			// TODO Set event click button Cancel in dialog DELETE
@@ -91,9 +93,7 @@ public class DeleteDialogFragment extends DialogFragment implements
 
 		case R.id.tvDeleteOk:
 			// TODO Set event click button OK in dialog DELETE
-			mData.deleteContacts(mContacts.get(mPosition)
-					.getId());
-			
+			mData.deleteContacts(mContacts.get(mPosition).getId());
 			DeleteDialogFragment.this.dismiss();
 			showContactFragment();
 			break;
@@ -110,7 +110,7 @@ public class DeleteDialogFragment extends DialogFragment implements
 	public void showContactFragment() {
 		FragmentTransaction fragtst = mContext.getFragmentManager()
 				.beginTransaction();
-		fragtst.replace(R.id.frameLayout, new ContactsFragment(mContext,mData));
+		fragtst.replace(R.id.frameLayout, new ContactsFragment(mContext, mData));
 		fragtst.commit();
 	}
 

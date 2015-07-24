@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import model.Contacts;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,17 +25,27 @@ import database.MyDatabase;
 
 public class DetailFragment extends Fragment implements OnClickListener {
 	// Declare Variables
-	private TextView mdetailCancel, mdetailSave, mdetailUsername,
-			meditDescription;
-	private EditText meditUsername;
-	private RelativeLayout mdetailAvatar;
+	private TextView mDetailCancel, mDetailSave, mDetailUsername,
+			mEditDescription;
+	private EditText mEditUsername;
+	private RelativeLayout mDetailAvatar;
 	private ArrayList<Contacts> mContacts;
 	private MyDatabase mData;
 	private int mPosition;
 	private View mView;
 	private MainActivity mContext;
 
-	public DetailFragment(MainActivity context,int position, MyDatabase data) {
+	/**
+	 * Init values start for Detail
+	 * 
+	 * @param context
+	 *            MainActivity
+	 * @param position
+	 *            positon in List
+	 * @param data
+	 *            MyDatabase
+	 */
+	public DetailFragment(MainActivity context, int position, MyDatabase data) {
 		this.mContext = context;
 		this.mPosition = position;
 		this.mContacts = data.getContacts();
@@ -58,21 +67,23 @@ public class DetailFragment extends Fragment implements OnClickListener {
 	private void init() {
 		// Locate the TextView, RelativeLayout, EditText in
 		// fragment_detail.xml
-		mdetailAvatar = (RelativeLayout) mView
+		mDetailAvatar = (RelativeLayout) mView
 				.findViewById(R.id.rlDetailAvatar);
-		mdetailCancel = (TextView) mView.findViewById(R.id.tvDetailCancel);
-		mdetailSave = (TextView) mView.findViewById(R.id.tvDetailSave);
-		mdetailUsername = (TextView) mView.findViewById(R.id.tvDetailUsername);
-		meditUsername = (EditText) mView.findViewById(R.id.edtEditUserName);
-		meditDescription = (TextView) mView
+		mDetailCancel = (TextView) mView.findViewById(R.id.tvDetailCancel);
+		mDetailSave = (TextView) mView.findViewById(R.id.tvDetailSave);
+		mDetailUsername = (TextView) mView.findViewById(R.id.tvDetailUsername);
+		mEditUsername = (EditText) mView.findViewById(R.id.edtEditUserName);
+		mEditDescription = (TextView) mView
 				.findViewById(R.id.edtEditDescription);
 		// Set the results into TextView, RelativeLayout, EditText
-		mdetailUsername.setText(mContacts.get(mPosition).getUserName());
-		meditUsername.setText(mContacts.get(mPosition).getUserName());
-		meditDescription.setText(mContacts.get(mPosition).getDecription());
-		mdetailAvatar.setBackgroundResource(mContacts.get(mPosition).getAvatar());
-		mdetailSave.setOnClickListener(this);
-		mdetailCancel.setOnClickListener(this);
+		mDetailUsername.setText(mContacts.get(mPosition).getUserName());
+		mEditUsername.setText(mContacts.get(mPosition).getUserName());
+		mEditDescription.setText(mContacts.get(mPosition).getDecription());
+		mDetailAvatar.setBackgroundResource(mContacts.get(mPosition)
+				.getAvatar());
+		// Set event click for button save and cancel after edit info detail
+		mDetailSave.setOnClickListener(this);
+		mDetailCancel.setOnClickListener(this);
 	}
 
 	/**
@@ -89,9 +100,10 @@ public class DetailFragment extends Fragment implements OnClickListener {
 
 		case R.id.tvDetailSave:
 			// TODO Set event click Save to save data edit to Database
-			mData.updateContacts(mContacts.get(mPosition).getId(),mContacts.get(mPosition).getAvatar(),
-					meditUsername.getText().toString(), meditDescription
-							.getText().toString());
+			mData.updateContacts(mContacts.get(mPosition).getId(), mContacts
+					.get(mPosition).getAvatar(), mEditUsername.getText()
+					.toString(), mEditDescription.getText().toString());
+			// Display Interface List contacts after completion Edit
 			mContext.showContact();
 			break;
 
@@ -101,14 +113,4 @@ public class DetailFragment extends Fragment implements OnClickListener {
 
 	}
 
-	/**
-	 * Display Interface List contacts after completion of operation Show
-	 * ListView with the data has changed
-	 */
-	public void showContactFragment(Fragment fragment) {
-		FragmentTransaction fragtst = mContext.getFragmentManager()
-				.beginTransaction();
-		fragtst.replace(R.id.frameLayout, fragment);
-		fragtst.commit();
-	}
 }

@@ -1,7 +1,8 @@
 /*
  * Custom Adapter to set values to ListView 
+ * Set event click button in item of ListView 
  */
-package com.example.contactslist;
+package adapter;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.contactslist.ContactsFragment;
+import com.example.contactslist.MainActivity;
+import com.example.contactslist.R;
+
 import database.MyDatabase;
 
 @SuppressLint("InflateParams")
@@ -26,29 +32,38 @@ public class ContactListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private MainActivity mContext;
 	private ContactsFragment mContactsFragment;
+	private int mCount;
 
 	/**
+	 * Init values start for Adapter
+	 * 
 	 * @param context
-	 *            application context
-	 * 
-	 * @param mAvatars
-	 *            ArrayList<Integer> set Avatar for Contacts
-	 * 
-	 * @param mUserNames
-	 *            ArrayList<String> set UserName for Contacts
+	 *            MainActivity
+	 * @param data
+	 *            MyDatabase
+	 * @param contactsFragment
+	 *            ContactsFragment
+	 * @param count
+	 *            Set count for Adapter
 	 */
-	public ContactListAdapter(MainActivity context, MyDatabase data, ContactsFragment contactsFragment) {
+	public ContactListAdapter(MainActivity context, MyDatabase data,
+			ContactsFragment contactsFragment, int count) {
 		this.mContext = context;
 		this.mContactsFragment = contactsFragment;
 		this.mContacts = new ArrayList<Contacts>();
 		this.mContacts.addAll(data.getContacts());
+		this.mCount = count;
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
+	//Set count for ListView display
+	public void setCount(int count) {
+		this.mCount = count;
 	}
 
 	@Override
 	public int getCount() {
-		return mContacts.size();
+		return mCount;
 	}
 
 	@Override
@@ -77,8 +92,7 @@ public class ContactListAdapter extends BaseAdapter {
 					.findViewById(R.id.rlAvatar);
 			holder.userName = (TextView) convertView
 					.findViewById(R.id.tvUserName);
-			holder.btnEdit = (ImageView) convertView
-					.findViewById(R.id.imgEdit);
+			holder.btnEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
 			holder.btnDelete = (ImageView) convertView
 					.findViewById(R.id.imgDelete);
 			holder.btnEdit.setTag("edit");
@@ -95,17 +109,14 @@ public class ContactListAdapter extends BaseAdapter {
 			// TODO Set event click button Edit
 			@Override
 			public void onClick(View v) {
-				mContext.isfragmentDetail = true;
-				mContactsFragment.setPositionContact(position);
-				mContactsFragment.onClick(v);
+				mContactsFragment.onClick(v, position);
 			}
 		});
 		holder.btnDelete.setOnClickListener(new OnClickListener() {
 			// TODO Set event click button Delete
 			@Override
 			public void onClick(View v) {
-				mContactsFragment.setPositionContact(position);
-				mContactsFragment.onClick(v);
+				mContactsFragment.onClick(v, position);
 			}
 		});
 
