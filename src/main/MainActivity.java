@@ -1,4 +1,6 @@
-package com.example.contactslist;
+package main;
+
+import com.example.contactslist.R;
 
 import model.Contacts;
 import android.app.Activity;
@@ -19,7 +21,7 @@ import detail.DetailFragment;
 
 public class MainActivity extends Activity implements OnClickListener {
 
-	// Declare Variables
+	// Declare Variables.
 	private boolean mIsFragmentDetail = false;
 	private ImageView mButtonBack, mLoading;
 	private Fragment mContactsFragment;
@@ -30,27 +32,31 @@ public class MainActivity extends Activity implements OnClickListener {
 	private MyDatabase mDatabase;
 	private Handler mHandler;
 
+	/**
+	 * Method constructor
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		init();
 	}
+
 	/**
-	 * Locate the element in activity_main.xml
-	 * Set Data for Database
-	 * Init ContactsFragment. Show Interface List contacts
-	 * Set event click button back to change fragment and exit application
+	 * Initialization Locate the element in activity_main.xml 
+	 * Run Thread set rotate icon loading more Set Data for Database Init ContactsFragment.
+	 * Show Interface List contacts. Set event click button back to change
+	 * fragment and exit application.
 	 */
 
 	private void init() {
-		// Locate the ImageView in activity_main.xml
+		// Locate the ImageView in activity_main.xml.
 		mIsLoadding = (LinearLayout) findViewById(R.id.llLoading);
 		mButtonBack = (ImageView) findViewById(R.id.imgBack);
 		mHandler = new Handler();
-		// run Thread set rotate icon loading more
+		// run Thread set rotate icon loading more.
 		new Thread(run).start();
-		// Set data for Database
+		// Set data for Database.
 		setDatabase();
 		mContactsFragment = new ContactsFragment(this, mDatabase);
 		showContact();
@@ -58,20 +64,20 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * Set event for action back
+	 * Set event for action click button back.
 	 */
-
 	@Override
 	public void onClick(View v) {
+		// TODO Set event for action click button back.
 		switch (v.getId()) {
 		case R.id.imgBack:
-			//is at Detail
+			// is at edit Detail.
 			if (mIsFragmentDetail) {
-				//show list Contacts 
+				// show list Contacts.
 				showContact();
 				mIsFragmentDetail = false;
 			} else {
-				//is at List Contacts
+				// is at List Contacts.
 				setDoubleClick();
 			}
 			break;
@@ -82,29 +88,30 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * Show icon Loading more rotate
+	 * Show icon rotate Loading more rotate.
 	 */
 	public void showLoading() {
 		mIsLoadding.setVisibility(LinearLayout.VISIBLE);
 	}
 
 	/**
-	 * Hide icon Loading more rotate
+	 * Hide icon rotate Loading more rotate.
 	 */
 	public void hideLoading() {
 		mIsLoadding.setVisibility(LinearLayout.INVISIBLE);
 	}
 
 	/**
-	 * Thread run set rotation for icon
+	 * Thread run set rotation for icon.
 	 */
 	Runnable run = new Runnable() {
+		// TODO Set rotate for Image.
 		@Override
 		public void run() {
 			mHandler.postDelayed(run, 10);
-			// Locate the ImageView in activity_main.xml
+			// Locate the ImageView in activity_main.xml.
 			mLoading = (ImageView) findViewById(R.id.imgLoading);
-			//Set Image rotate
+			// Set Image rotate.
 			mLoading.setRotation(mRotation);
 			mRotation += 4;
 			if (mRotation >= 360) {
@@ -117,12 +124,12 @@ public class MainActivity extends Activity implements OnClickListener {
 	};
 
 	/**
-	 * Function set Double Click to exit for exit application
+	 * Function set Double Click to exit for exit application.
 	 */
 	@Override
 	public void onBackPressed() {
 		if (mIsFragmentDetail) {
-		    showContact();
+			showContact();
 		} else {
 			setDoubleClick();
 		}
@@ -146,20 +153,20 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	/**
 	 * Init values for ArrayList mAvatars. Create Database and set values for
-	 * database
+	 * database.
 	 */
 	private void setDatabase() {
 		String userName = "Hoang Luan";
 		String decription = "DECRIPTION";
-		//Create Array avatar
+		// Create Array avatar.
 		int[] avatars = { R.drawable.img_avatar_1, R.drawable.img_avatar_2,
 				R.drawable.img_avatar_3, R.drawable.img_avatar_4 };
 		mDatabase = new MyDatabase(this);
 		for (int i = 0; i < 100; i++) {
 			try {
-				//Add data to Database
-				mDatabase.addContact(new Contacts("" + i, avatars[i % 4], userName
-						+ " " + i, decription + " " + i));
+				// Add data to Database.
+				mDatabase.addContact(new Contacts("" + i, avatars[i % 4],
+						userName + " " + i, decription + " " + i));
 			} catch (SQLException e) {
 				Log.d("INSERT", "ERROR");
 			}
@@ -167,7 +174,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * Show List Contacts
+	 * Show List Contacts.
 	 */
 	public void showContact() {
 		mIsFragmentDetail = false;
@@ -177,9 +184,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * Show detail contacts to Edit username or description
+	 * Show detail contacts to Edit username or description.
 	 * 
-	 * @param position positon in list
+	 * @param position
+	 *            positon in list.
 	 */
 	public void showDetail(int position) {
 		mIsFragmentDetail = true;
@@ -192,7 +200,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	/**
 	 * Show dialog confirm delete
 	 * 
-	 * @param position positon in list
+	 * @param position
+	 *            positon in list
 	 */
 	public void showDelete(int position) {
 		new DeleteDialogFragment(this, position, mDatabase).show(

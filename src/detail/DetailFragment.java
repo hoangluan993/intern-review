@@ -1,12 +1,13 @@
 /*
  * Displays detailed information of a person in the contacts
- * You can edit the information and store information
+ * You can edit the information and store information in database
  */
 
 package detail;
 
 import java.util.ArrayList;
 
+import main.MainActivity;
 import model.Contacts;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.contactslist.MainActivity;
 import com.example.contactslist.R;
 
 import database.MyDatabase;
@@ -36,14 +36,17 @@ public class DetailFragment extends Fragment implements OnClickListener {
 	private MainActivity mContext;
 
 	/**
-	 * Init values start for Detail
+	 * This is Contructor Init values start for action Edit information Detail,
+	 * including data in database contains ArrayList include id, avatar,
+	 * username, decription and context of MainActivity.
 	 * 
 	 * @param context
-	 *            MainActivity
+	 *            MainActivity this is context of MainActivity.
 	 * @param position
-	 *            positon in List
+	 *            his is position must edit
 	 * @param data
-	 *            MyDatabase
+	 *            MyDatabase this is database contains information contacts
+	 *            including id, avatar, username, decription.
 	 */
 	public DetailFragment(MainActivity context, int position, MyDatabase data) {
 		this.mContext = context;
@@ -62,11 +65,11 @@ public class DetailFragment extends Fragment implements OnClickListener {
 
 	/**
 	 * Init values for Detail User name, Edit Username, Description Create event
-	 * click Cancel and Save
+	 * click Cancel and Save.
 	 */
 	private void init() {
 		// Locate the TextView, RelativeLayout, EditText in
-		// fragment_detail.xml
+		// fragment_detail.xml.
 		mDetailAvatar = (RelativeLayout) mView
 				.findViewById(R.id.rlDetailAvatar);
 		mDetailCancel = (TextView) mView.findViewById(R.id.tvDetailCancel);
@@ -75,35 +78,35 @@ public class DetailFragment extends Fragment implements OnClickListener {
 		mEditUsername = (EditText) mView.findViewById(R.id.edtEditUserName);
 		mEditDescription = (TextView) mView
 				.findViewById(R.id.edtEditDescription);
-		// Set the results into TextView, RelativeLayout, EditText
+		// Set the results into TextView, RelativeLayout, EditText.
 		mDetailUsername.setText(mContacts.get(mPosition).getUserName());
 		mEditUsername.setText(mContacts.get(mPosition).getUserName());
 		mEditDescription.setText(mContacts.get(mPosition).getDecription());
 		mDetailAvatar.setBackgroundResource(mContacts.get(mPosition)
 				.getAvatar());
-		// Set event click for button save and cancel after edit info detail
+		// Set event click for button save and cancel after edit info detail.
 		mDetailSave.setOnClickListener(this);
 		mDetailCancel.setOnClickListener(this);
 	}
 
 	/**
-	 * Create event click Cancel, Save Data to Database
+	 * Create event click Cancel, Save Data to Database.
 	 */
 	@Override
 	public void onClick(View v) {
-		// TODO Event when click Button
+		// TODO Event when click Button.
 		switch (v.getId()) {
 		case R.id.tvDetailCancel:
-			// TODO Set event click Cancel to don't save data edit to Database
+			// TODO Set event click Cancel to don't save data edit to Database.
 			mContext.showContact();
 			break;
 
 		case R.id.tvDetailSave:
-			// TODO Set event click Save to save data edit to Database
+			// TODO Set event click Save to save data edit to Database.
 			mData.updateContacts(mContacts.get(mPosition).getId(), mContacts
 					.get(mPosition).getAvatar(), mEditUsername.getText()
 					.toString(), mEditDescription.getText().toString());
-			// Display Interface List contacts after completion Edit
+			// Display Interface List contacts after completion Edit.
 			mContext.showContact();
 			break;
 

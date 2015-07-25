@@ -1,11 +1,13 @@
 /*
  * Custom Adapter to set values to ListView 
- * Set event click button in item of ListView 
+ * Set event click button edit and delele in item of ListView 
  */
 package adapter;
 
 import java.util.ArrayList;
 
+import main.ContactsFragment;
+import main.MainActivity;
 import model.Contacts;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -18,8 +20,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.contactslist.ContactsFragment;
-import com.example.contactslist.MainActivity;
 import com.example.contactslist.R;
 
 import database.MyDatabase;
@@ -35,16 +35,18 @@ public class ContactListAdapter extends BaseAdapter {
 	private int mCount;
 
 	/**
-	 * Init values start for Adapter
+	 * Init values start for Adapter, data container ArrayList contacts include
+	 * id, avatar, username, description, And context of MainActivity. Count to
+	 * set limit item show in list view.
 	 * 
 	 * @param context
-	 *            MainActivity
+	 *            MainActivity this is context of MainActivity.
 	 * @param data
-	 *            MyDatabase
+	 *            MyDatabase this is database contains ArrayList contacts.
 	 * @param contactsFragment
-	 *            ContactsFragment
+	 *            ContactsFragment this is context of ContactsFragment.
 	 * @param count
-	 *            Set count for Adapter
+	 *            Set limit show item for Adapter.
 	 */
 	public ContactListAdapter(MainActivity context, MyDatabase data,
 			ContactsFragment contactsFragment, int count) {
@@ -56,7 +58,8 @@ public class ContactListAdapter extends BaseAdapter {
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
-	//Set count for ListView display
+
+	// Set count for ListView display.
 	public void setCount(int count) {
 		this.mCount = count;
 	}
@@ -77,8 +80,9 @@ public class ContactListAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * Init values for Item of ListView. Set event Click ImageView Edit and
-	 * Delete.
+	 * Locate the TextView, RelativeLayout, ImageView in item_list_contacts.xml.
+	 * Init values for Item of ListView include Avatar, UerName. Set event Click
+	 * ImageView Edit and Delete.
 	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -87,7 +91,7 @@ public class ContactListAdapter extends BaseAdapter {
 			convertView = mInflater.inflate(R.layout.item_list_contacts, null);
 			holder = new ViewHolder();
 			// Locate the TextView, RelativeLayout, ImageView in
-			// item_list_contacts.xml
+			// item_list_contacts.xml.
 			holder.rlavatar = (RelativeLayout) convertView
 					.findViewById(R.id.rlAvatar);
 			holder.userName = (TextView) convertView
@@ -101,19 +105,19 @@ public class ContactListAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		// Set the results into TextView, ImageView
+		// Set the results into TextView, ImageView.
 		holder.rlavatar.setBackgroundResource(mContacts.get(position)
 				.getAvatar());
 		holder.userName.setText(mContacts.get(position).getUserName());
 		holder.btnEdit.setOnClickListener(new OnClickListener() {
-			// TODO Set event click button Edit
+			// TODO Set event click button Edit.
 			@Override
 			public void onClick(View v) {
 				mContactsFragment.onClick(v, position);
 			}
 		});
 		holder.btnDelete.setOnClickListener(new OnClickListener() {
-			// TODO Set event click button Delete
+			// TODO Set event click button Delete.
 			@Override
 			public void onClick(View v) {
 				mContactsFragment.onClick(v, position);

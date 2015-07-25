@@ -2,9 +2,11 @@
  * Initialization List Contacts
  * Display to interface 
  */
-package com.example.contactslist;
+package main;
 
 import java.util.ArrayList;
+
+import com.example.contactslist.R;
 
 import model.Contacts;
 import adapter.ContactListAdapter;
@@ -21,23 +23,25 @@ import database.MyDatabase;
 
 public class ContactsFragment extends Fragment {
 
-	// Declare Variables
+	// Declare Variables.
 	private ListView mListContact;
 	private MyDatabase mData;
 	private View mView;
 	private MainActivity mContext;
 	private ContactListAdapter mAdapter;
 	private ArrayList<Contacts> mContacts;
-	// Set the limit for load more
+	// Set the limit item show in ListView before load more.
 	public int limit = 15;
 
 	/**
-	 * Init values start for List Contacts
+	 * Init values start for List Contacts including database contains ArrayList
+	 * include id, avatar, username, decription.
 	 * 
 	 * @param context
-	 *            MainActivity
+	 *            MainActivity this is context of MainActivity.
 	 * @param data
-	 *            MyDatabase
+	 *            MyDatabase this is database contains information contacts
+	 *            including id, avatar, username, decription.
 	 */
 	public ContactsFragment(MainActivity context, MyDatabase data) {
 		this.mContext = context;
@@ -48,29 +52,30 @@ public class ContactsFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// Get the view from fragment_contacts.xml
+		// Get the view from fragment_contacts.xml.
 		mView = inflater.inflate(R.layout.fragment_contact, container, false);
 		init();
 		return mView;
 	}
+
 	/**
-	 * Locate the element in fragment_contact.xml
-	 * Create ContactsListAdapter
-	 * Set Event when stay at last contacts to load more
+	 * Locate the element in fragment_contact.xml Create ContactsListAdapter and
+	 * Set Adapter for ListView Set event when stay at last contacts to load
+	 * more.
 	 */
 
 	private void init() {
-		// Locate the ListView in fragment_contact.xml
+		// Locate the ListView in fragment_contact.xml.
 		mListContact = (ListView) mView.findViewById(R.id.lvContact);
 		mAdapter = new ContactListAdapter((MainActivity) getActivity(), mData,
 				ContactsFragment.this, limit);
 		mListContact.setAdapter(mAdapter);
-		// Set Event when stay at last contacts
+		// Set Event when stay at last contacts.
 		mListContact.setOnScrollListener(new OnScrollListener() {
 
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				// TODO Last Events ListView
+				// TODO Last Events ListView.
 				int threshold = 1;
 				int count = mListContact.getCount();
 
@@ -91,7 +96,7 @@ public class ContactsFragment extends Fragment {
 
 	/**
 	 * Thread load more contact And add contacts to list when stay at last
-	 * contact Load more adding 10 element
+	 * contact Load more adding 10 element.
 	 * 
 	 * @author HoangLuan
 	 *
@@ -101,14 +106,23 @@ public class ContactsFragment extends Fragment {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			// Show icon Loading more
+			// Show icon Loading more.
 			mContext.showLoading();
 		}
 
+		/**
+		 * Run in background
+		 */
 		@Override
 		protected Void doInBackground(Void... params) {
-			// Set elements display in list view.
-
+			// TODO Set add elements display in list view after Load more.
+			// Set Delay 1s for show icon Loading more
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (limit + 10 < mContacts.size()) {
 				limit = limit + 10;
 			} else {
@@ -117,30 +131,44 @@ public class ContactsFragment extends Fragment {
 			return null;
 		}
 
+		/**
+		 * Update Interface.
+		 */
 		@Override
 		protected void onPostExecute(Void result) {
-			// After adding data elements to Get and add ListView
+			// After adding data elements to Get and add ListView.
 			int position = mListContact.getLastVisiblePosition();
+			// Set limit item show in ListView.
 			mAdapter.setCount(limit);
 			mAdapter = new ContactListAdapter(mContext, mData,
 					ContactsFragment.this, limit);
 			mListContact.setAdapter(mAdapter);
 			mListContact.setSelectionFromTop(position, 0);
-			// hide icon Loading more
+			// hide icon Loading more.
 			mContext.hideLoading();
 		}
 
 	}
 
+	/**
+	 * Set event click button edit or delete in item of ListView Go to page Edit
+	 * Detail or show dialog confirm delete.
+	 * 
+	 * @param v View
+	 * @param position
+	 *            set position for edit or delete in database and update
+	 *            Interface.
+	 */
+
 	public void onClick(View v, int position) {
-		// Event click button Edit and delete
+		// TODO Event click button Edit and delete.
 		String mgetAction = (String) v.getTag();
 
 		if (mgetAction.equals("edit")) {
-			// TODO Edit contact profile
+			// TODO Edit contact profile.
 			mContext.showDetail(position);
 		} else {
-			// TODO Delete contact
+			// TODO Delete contact.
 			mContext.showDelete(position);
 		}
 	}
